@@ -1,170 +1,50 @@
 <html>
-  <head>
-    <title>Group 7 - Interior Design Simulator</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-  </head>
-  <body>
-    <!--Three.js , etc. libraries-->
-    <script src="js/three.js"></script>
-    <script src="js/OrbitControls.js"></script>
-    <script src="js/dat.gui.min.js"></script>
 
-    <div id="info">
-      <p>Computer Graphics (Group 7) - Interior Design Simulator</p>
-    </div>
+<head>
+  <title>Group 7 - Interior Design Simulator</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
 
-    <script src="InitScene.js"> </script>
-    <script src="ZoomControls.js"> </script>
-    <script>
-      
-    // Mohamad's Task
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(90,1920/1080,0.1,1000);
-    camera.position.set(0,0,15);
-    camera.lookAt(0,0,1);
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(1920,1080);
-    document.body.appendChild(renderer.domElement);
+<body>
+  <!--Three.js , etc. libraries-->
+  <script src="js/three.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  <script src="js/dat.gui.min.js"></script>
+
+  <div id="info">
+    <p>Computer Graphics (Group 7) - Interior Design Simulator</p>
+  </div>
+
+  <script src="InitScene.js"> </script>
+  <script src="ZoomControls.js"> </script>
+  <script src="FloorPlan.js"> </script>
+  <script src="RoomLighting.js"> </script>
+  <script>
 
     //This is the cube or player object
-    var cube_material = new THREE.MeshBasicMaterial();
-    cube_material.color = new THREE.Color(0,1,0);
+    var cube_material = new THREE.MeshLambertMaterial();
+    cube_material.color = new THREE.Color(0, 1, 0);
     cube_material.wireframe = false;
-    var cube_geometry = new THREE.BoxGeometry(1,1,1);
+    var cube_geometry = new THREE.BoxGeometry(1, 1, 1);
     var cube = new THREE.Mesh(cube_geometry, cube_material);
 
-    //This is the whole floor
-    var centre_material = new THREE.MeshBasicMaterial();
-    centre_material.color = new THREE.Color(1,1,1);
-    centre_material.wireframe=false;
-    var centre_geometry = new THREE.PlaneGeometry(20,20,20,20);
-    var centre = new THREE.Mesh(centre_geometry, centre_material);
+    cube.position.z = 1;
+    cube.receiveShadow = true;
+    cube.castShadow = true;
 
-    //This is the living room
-    var family_material = new THREE.MeshBasicMaterial();
-    family_material.color = new THREE.Color(0,1,1);
-    family_material.wireframe=false;
-    var family_geometry = new THREE.PlaneGeometry(10,10,10,10);
-    var family = new THREE.Mesh(family_geometry, family_material);
+    floorPlan();
 
-    //This is the master bed (red)
-    var bed1_material = new THREE.MeshBasicMaterial();
-    bed1_material.color = new THREE.Color(128,0,0);
-    bed1_material.wireframe=false;
-    var bed1_geometry = new THREE.PlaneGeometry(7.5,5);
-    var bed1 = new THREE.Mesh(bed1_geometry, bed1_material);
+    // Matt's Task - Furniture 
 
-    //This is the 2nd bedroom
-    var bed2_material = new THREE.MeshBasicMaterial();
-    bed2_material.color = new THREE.Color(0,255,0);
-    bed2_material.wireframe=false;
-    var bed2_geometry = new THREE.PlaneGeometry(5,5);
-    var bed2 = new THREE.Mesh(bed2_geometry, bed2_material);
-
-    //This is the 3rd bedroom
-    var bed3_material = new THREE.MeshBasicMaterial();
-    bed3_material.color = new THREE.Color(255,255,0);
-    bed3_material.wireframe=false;
-    var bed3_geometry = new THREE.PlaneGeometry(5,5);
-    var bed3 = new THREE.Mesh(bed3_geometry, bed3_material);
-
-   //This is the toilet
-    var toilet_material = new THREE.MeshBasicMaterial();
-    toilet_material.color = new THREE.Color(0,0,0);
-    toilet_material.wireframe=false;
-    var toilet_geometry = new THREE.PlaneGeometry(10,2.5);
-    var toilet = new THREE.Mesh(toilet_geometry, toilet_material);
-
-    //This is the bathroom
-    var bathroom_material = new THREE.MeshBasicMaterial();
-    bathroom_material.color = new THREE.Color(0,0,1);
-    bathroom_material.wireframe=false;
-    var bathroom_geometry = new THREE.PlaneGeometry(10,2.5);
-    var bathroom = new THREE.Mesh(bathroom_geometry, bathroom_material);
-
-    //This is the kitchen
-    var kitchen_material = new THREE.MeshBasicMaterial();
-    kitchen_material.color = new THREE.Color(255,0,255);
-    kitchen_material.wireframe=false;
-    var kitchen_geometry = new THREE.PlaneGeometry(10,5);
-    var kitchen = new THREE.Mesh(kitchen_geometry, kitchen_material);
-
-    family.position.x-=5;
-
-    bed1.position.x-=6.25;
-    bed1.position.y-=7.5;
-
-    bed2.position.x-=7.5;
-    bed2.position.y+=7.5;
-
-    bed3.position.x-=2.5;
-    bed3.position.y+=7.5;
-
-    toilet.position.x+=5;
-    toilet.position.y-=1.25;
-
-    bathroom.position.x+=5;
-    bathroom.position.y-=3.75;
-
-    kitchen.position.x+=5;
-    kitchen.position.y+=2.5;
+    //
 
 
+    // GUI ///
+    var guiControls = new dat.GUI();
+    guiControls.add(spotlight, 'intensity', 0, 1);
 
+  </script>
 
-    scene.add(cube);
-    scene.add(centre);
-    scene.add(family);
-    scene.add(bed1);
-    scene.add(bed2);
-    scene.add(bed3);
-    scene.add(kitchen);
-    scene.add(toilet);
-    scene.add(bathroom);
+</body>
 
-    var roofVertices = [
-    new THREE.Vector3(0, 10, 0), new THREE.Vector3(10, 15, 0), new THREE.Vector3(20, 10, 0),
-    new THREE.Vector3(20, 10, 20), new THREE.Vector3(10, 15, 20), new THREE.Vector3(0, 10, 20)
-];
-
-    var UpdateLoop = function()
-    {
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      requestAnimationFrame(UpdateLoop);
-
-      renderer.render(scene,camera);
-    }
-    requestAnimationFrame(UpdateLoop);
-
-    // Matt's Task
-      
-    // Gunny's Task
-      
-     //lighting - basic light from camera towards the scene
-      var cameralight = new THREE.PointLight( new THREE.Color(1,1,1), 0.5 );
-      camera.add(cameralight );
-      scene.add(camera);
-
-      //ambient lighting
-      var ambientlight = new THREE.AmbientLight(new THREE.Color(1,1,1),0.2);
-      scene.add(ambientlight);
-
-      var spotlight = new THREE.SpotLight(new THREE.Color(1,1,1), 0.5);
-      spotlight.position.y=30;
-      spotlight.angle = Math.PI / 8;
-      spotlight.penumbra = 0.3;
-      spotlight.castShadow = true;
-      //spotlight.target=sphere_mesh; // is this needed?
-      scene.add(spotlight);
-      var spotLightHelper = new THREE.SpotLightHelper( spotlight );
-      scene.add( spotLightHelper );
-
-      // GUI ///
-      var guiControls = new dat.GUI();
-      guiControls.add(spotlight, 'intensity', 0, 1);
-      
-    </script>
-
-  </body>
 </html>
