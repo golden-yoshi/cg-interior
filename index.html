@@ -4,16 +4,20 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
-    <!--include the three.js library-->
-    <script src="js/three.js"> </script>
-    <script src="js/three.js"> </script>
+    <!--Three.js , etc. libraries-->
+    <script src="js/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/dat.gui.min.js"></script>
 
     <div id="info">
-      <p>Mohamad Floorplan</p>
+      <p>Computer Graphics (Group 7) - Interior Design Simulator</p>
     </div>
 
+    <script src="InitScene.js"> </script>
+    <script src="ZoomControls.js"> </script>
     <script>
-      // Mohamad's Task
+      
+    // Mohamad's Task
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(90,1920/1080,0.1,1000);
     camera.position.set(0,0,15);
@@ -133,13 +137,33 @@
     }
     requestAnimationFrame(UpdateLoop);
 
+    // Matt's Task
+      
+    // Gunny's Task
+      
+     //lighting - basic light from camera towards the scene
+      var cameralight = new THREE.PointLight( new THREE.Color(1,1,1), 0.5 );
+      camera.add(cameralight );
+      scene.add(camera);
 
-      // Gunny's Task
+      //ambient lighting
+      var ambientlight = new THREE.AmbientLight(new THREE.Color(1,1,1),0.2);
+      scene.add(ambientlight);
 
+      var spotlight = new THREE.SpotLight(new THREE.Color(1,1,1), 0.5);
+      spotlight.position.y=30;
+      spotlight.angle = Math.PI / 8;
+      spotlight.penumbra = 0.3;
+      spotlight.castShadow = true;
+      //spotlight.target=sphere_mesh; // is this needed?
+      scene.add(spotlight);
+      var spotLightHelper = new THREE.SpotLightHelper( spotlight );
+      scene.add( spotLightHelper );
 
-
-      // Matt's Task
-
+      // GUI ///
+      var guiControls = new dat.GUI();
+      guiControls.add(spotlight, 'intensity', 0, 1);
+      
     </script>
 
   </body>
