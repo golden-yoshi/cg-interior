@@ -58,7 +58,7 @@
       camera.add(cameralight );
       scene.add(camera);
 
-      //then add ambient lighting
+      //ambient lighting
       var ambientlight = new THREE.AmbientLight(new THREE.Color(1,1,1),0.2);
       scene.add(ambientlight);
 
@@ -67,7 +67,7 @@
       spotlight.angle = Math.PI / 8;
       spotlight.penumbra = 0.3;
       spotlight.castShadow = true;
-      //spotlight.target=sphere_mesh;
+      //spotlight.target=sphere_mesh; // is this needed?
       scene.add(spotlight);
       var spotLightHelper = new THREE.SpotLightHelper( spotlight );
       scene.add( spotLightHelper );
