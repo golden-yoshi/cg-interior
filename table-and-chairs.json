@@ -1,0 +1,349 @@
+{
+    "geometries": [{
+        "uuid": "AD37C71F-A577-3B91-8A02-622503BE6D69",
+        "data": {
+            "influencesPerVertex": 2,
+            "skinWeights": [],
+            "metadata": {
+                "version": 3,
+                "vertices": 0,
+                "morphTargets": 0,
+                "bones": 0,
+                "uvs": 0,
+                "materials": 0,
+                "generator": "io_three",
+                "normals": 0
+            },
+            "bones": [],
+            "uvs": [],
+            "skinIndices": [],
+            "vertices": [],
+            "morphTargets": [],
+            "faces": [],
+            "name": "3DSMesh_31_21Geometry",
+            "animations": [],
+            "normals": []
+        },
+        "materials": [],
+        "type": "Geometry"
+    },{
+        "uuid": "1648CAFC-7CB5-35C2-A6D5-C0D6507FDDA2",
+        "data": {
+            "influencesPerVertex": 2,
+            "skinWeights": [],
+            "metadata": {
+                "version": 3,
+                "vertices": 0,
+                "morphTargets": 0,
+                "bones": 0,
+                "uvs": 0,
+                "materials": 0,
+                "generator": "io_three",
+                "normals": 0
+            },
+            "bones": [],
+            "uvs": [],
+            "skinIndices": [],
+            "vertices": [],
+            "morphTargets": [],
+            "faces": [],
+            "name": "3DSMesh_29_20Geometry",
+            "animations": [],
+            "normals": []
+        },
+        "materials": [],
+        "type": "Geometry"
+    },{
+        "uuid": "404DE4FB-B26B-32D2-B038-E304E1295FA8",
+        "data": {
+            "influencesPerVertex": 2,
+            "skinWeights": [],
+            "metadata": {
+                "version": 3,
+                "vertices": 0,
+                "morphTargets": 0,
+                "bones": 0,
+                "uvs": 0,
+                "materials": 0,
+                "generator": "io_three",
+                "normals": 0
+            },
+            "bones": [],
+            "uvs": [],
+            "skinIndices": [],
+            "vertices": [],
+            "morphTargets": [],
+            "faces": [],
+            "name": "3DSMesh_16_11Geometry",
+            "animations": [],
+            "normals": []
+        },
+        "materials": [],
+        "type": "Geometry"
+    },{
+        "uuid": "158469AE-1DCA-365C-A2C3-592B15A70545",
+        "data": {
+            "influencesPerVertex": 2,
+            "skinWeights": [],
+            "metadata": {
+                "version": 3,
+                "vertices": 0,
+                "morphTargets": 0,
+                "bones": 0,
+                "uvs": 0,
+                "materials": 0,
+                "generator": "io_three",
+                "normals": 0
+            },
+            "bones": [],
+            "uvs": [],
+            "skinIndices": [],
+            "vertices": [],
+            "morphTargets": [],
+            "faces": [],
+            "name": "3DSMesh_7_6Geometry",
+            "animations": [],
+            "normals": []
+        },
+        "materials": [],
+        "type": "Geometry"
+    },{
+        "uuid": "204579A0-685B-33E2-B36F-4D62CC2AF3EE",
+        "data": {
+            "influencesPerVertex": 2,
+            "skinWeights": [],
+            "metadata": {
+                "version": 3,
+                "vertices": 0,
+                "morphTargets": 0,
+                "bones": 0,
+                "uvs": 0,
+                "materials": 0,
+                "generator": "io_three",
+                "normals": 0
+            },
+            "bones": [],
+            "uvs": [],
+            "skinIndices": [],
+            "vertices": [],
+            "morphTargets": [],
+            "faces": [],
+            "name": "3DSMesh_28_19Geometry",
+            "animations": [],
+            "normals": []
+        },
+        "materials": [],
+        "type": "Geometry"
+    },{
+        "uuid": "4BD3C446-7851-3777-858E-E5B29C82E01B",
+        "data": {
+            "influencesPerVertex": 2,
+            "skinWeights": [],
+            "metadata": {
+                "version": 3,
+                "vertices": 0,
+                "morphTargets": 0,
+                "bones": 0,
+                "uvs": 0,
+                "materials": 0,
+                "generator": "io_three",
+                "normals": 0
+            },
+            "bones": [],
+            "uvs": [],
+            "skinIndices": [],
+            "vertices": [],
+            "morphTargets": [],
+            "faces": [],
+            "name": "3DSMesh_11_8Geometry",
+            "animations": [],
+            "normals": []
+        },
+        "materials": [],
+        "type": "Geometry"
+    },{
+        "uuid": "65E52BD3-5F79-3CC1-A200-8559D1871371",
+        "data": {
+            "influencesPerVertex": 2,
+            "skinWeights": [],
+            "metadata": {
+                "version": 3,
+                "vertices": 0,
+                "morphTargets": 0,
+                "bones": 0,
+                "uvs": 0,
+                "materials": 0,
+                "generator": "io_three",
+                "normals": 0
+            },
+            "bones": [],
+            "uvs": [],
+            "skinIndices": [],
+            "vertices": [],
+            "morphTargets": [],
+            "faces": [],
+            "name": "3DSMesh_17_12Geometry",
+            "animations": [],
+            "normals": []
+        },
+        "materials": [],
+        "type": "Geometry"
+    },{
+        "uuid": "C71CB88B-95F0-31E4-A45E-81A26A0A249B",
+        "data": {
+            "influencesPerVertex": 2,
+            "skinWeights": [],
+            "metadata": {
+                "version": 3,
+                "vertices": 0,
+                "morphTargets": 0,
+                "bones": 0,
+                "uvs": 0,
+                "materials": 0,
+                "generator": "io_three",
+                "normals": 0
+            },
+            "bones": [],
+            "uvs": [],
+            "skinIndices": [],
+            "vertices": [],
+            "morphTargets": [],
+            "faces": [],
+            "name": "3DSMesh_32_22Geometry",
+            "animations": [],
+            "normals": []
+        },
+        "materials": [],
+        "type": "Geometry"
+    },{
+        "uuid": "D3CA4D11-238D-3924-9544-E6E1E84DB2F2",
+        "data": {
+            "influencesPerVertex": 2,
+            "skinWeights": [],
+            "metadata": {
+                "version": 3,
+                "vertices": 0,
+                "morphTargets": 0,
+                "bones": 0,
+                "uvs": 0,
+                "materials": 0,
+                "generator": "io_three",
+                "normals": 0
+            },
+            "bones": [],
+            "uvs": [],
+            "skinIndices": [],
+            "vertices": [],
+            "morphTargets": [],
+            "faces": [],
+            "name": "3DSMesh_10_7Geometry",
+            "animations": [],
+            "normals": []
+        },
+        "materials": [],
+        "type": "Geometry"
+    }],
+    "metadata": {
+        "version": 4.4,
+        "generator": "io_three",
+        "type": "Object"
+    },
+    "textures": [],
+    "materials": [{
+        "specular": 131586,
+        "depthTest": true,
+        "uuid": "52285FF4-2AB7-3869-94FC-877E43F16C63",
+        "side": 2,
+        "emissive": 0,
+        "type": "MeshPhongMaterial",
+        "shininess": 50,
+        "vertexColors": false,
+        "color": 8422307,
+        "blending": "NormalBlending",
+        "ambient": 8422307,
+        "name": "8083a3",
+        "depthWrite": true
+    },{
+        "specular": 131586,
+        "depthTest": true,
+        "uuid": "32263CBD-B6CF-3C24-A1AC-CC7A73A146EF",
+        "side": 2,
+        "emissive": 0,
+        "type": "MeshPhongMaterial",
+        "shininess": 50,
+        "vertexColors": false,
+        "color": 8995678,
+        "blending": "NormalBlending",
+        "ambient": 8995678,
+        "name": "89435e",
+        "depthWrite": true
+    },{
+        "specular": 131586,
+        "depthTest": true,
+        "uuid": "A991392F-C29B-3263-BE50-4CBE6186C0C9",
+        "side": 2,
+        "emissive": 0,
+        "type": "MeshPhongMaterial",
+        "shininess": 50,
+        "vertexColors": false,
+        "color": 10256253,
+        "blending": "NormalBlending",
+        "ambient": 10256253,
+        "name": "9c7f7d",
+        "depthWrite": true
+    },{
+        "specular": 131586,
+        "depthTest": true,
+        "uuid": "4D134E36-331E-37D6-A301-669FE073FEDB",
+        "side": 2,
+        "emissive": 0,
+        "type": "MeshPhongMaterial",
+        "shininess": 50,
+        "vertexColors": false,
+        "color": 11381725,
+        "blending": "NormalBlending",
+        "ambient": 11381725,
+        "name": "adabdd",
+        "depthWrite": true
+    },{
+        "specular": 131586,
+        "depthTest": true,
+        "uuid": "3A5D0A56-6092-35C6-8AB2-1C1E9CC3D84B",
+        "side": 2,
+        "emissive": 0,
+        "type": "MeshPhongMaterial",
+        "shininess": 50,
+        "vertexColors": false,
+        "color": 13420817,
+        "blending": "NormalBlending",
+        "ambient": 13420817,
+        "name": "ccc911",
+        "depthWrite": true
+    },{
+        "specular": 131586,
+        "depthTest": true,
+        "uuid": "A05C207B-E3D1-3023-96B3-1D1FFEA34A95",
+        "side": 2,
+        "emissive": 0,
+        "type": "MeshPhongMaterial",
+        "shininess": 50,
+        "vertexColors": false,
+        "color": 16777215,
+        "blending": "NormalBlending",
+        "ambient": 16777215,
+        "name": "ffffff",
+        "depthWrite": true
+    }],
+    "images": [],
+    "animations": [{
+        "name": "default",
+        "fps": 29,
+        "tracks": []
+    }],
+    "object": {
+        "uuid": "5FFC8122-5C49-49CA-89AE-58446A3009CA",
+        "children": [],
+        "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+        "type": "Scene"
+    }
+}
