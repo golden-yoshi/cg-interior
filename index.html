@@ -10,6 +10,9 @@
   <script src="js/three.js"></script>
   <script src="js/OrbitControls.js"></script>
   <script src="js/dat.gui.min.js"></script>
+  <script src="js/OBJLoader.js"></script>
+  <script src="js/MTLLoader.js"></script>
+  <script src="js/PLYLoader.js"></script>
 
   <div id="info">
     <p>Computer Graphics (Group 7) - Interior Design Simulator</p>
@@ -35,9 +38,30 @@
     floorPlan();
 
     // Matt's Task - Furniture 
+    // var mtlLoader = new THREE.MTLLoader();
+    // mtlLoader.load('models/sofa2.mtl', function (materials) {
 
-    //
+    //   materials.preload();
+    //   var objLoader = new THREE.OBJLoader();
+    //   objLoader.setMaterials(materials);
 
+    //   objLoader.load('models/sofa2.obj', function (mesh) {
+    //     scene.add(mesh);
+    //   });
+    // });
+
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/sofa2.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial();
+      material.color = new THREE.Color(0.8,1,1);
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+
+    });
+    
 
     // GUI ///
     var guiControls = new dat.GUI();
