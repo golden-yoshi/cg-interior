@@ -2,14 +2,16 @@
 
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-var MyUpdateLoop = function () {
+var UpdateLoop = function () {
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
     //call the render with the scene and the camera
     renderer.render(scene, camera);
     controls.update();
     //recursive call to update camera position from mouse change
-    requestAnimationFrame(MyUpdateLoop);
+    requestAnimationFrame(UpdateLoop);
 };
-requestAnimationFrame(MyUpdateLoop);
+requestAnimationFrame(UpdateLoop);
 
 //Adjust window when resized
 var MyResize = function () {
