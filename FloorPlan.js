@@ -1,3 +1,4 @@
+/**MakeLabelCanvas function src: https://threejsfundamentals.org/threejs/lessons/threejs-billboards.html */
 function makeLabelCanvas(baseWidth, size, name) {
   const borderSize = 2;
   const ctx = document.createElement('canvas').getContext('2d');
@@ -17,17 +18,39 @@ function makeLabelCanvas(baseWidth, size, name) {
   ctx.textBaseline = 'middle';
   ctx.textAlign = 'center';
 
-  ctx.fillStyle = 'blue';
+  ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, width, height);
 
   // scale to fit but don't stretch
   const scaleFactor = Math.min(1, baseWidth / textWidth);
   ctx.translate(width / 2, height / 2);
   ctx.scale(scaleFactor, 1);
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = 'black';
   ctx.fillText(name, 0, 0);
 
   return ctx.canvas;
+}
+
+function newLabel(canvas){
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.minFilter = THREE.LinearFilter;
+
+  const labelMaterial = new THREE.SpriteMaterial({
+    map: texture,
+    transparent: true,
+  });
+
+  const label = new THREE.Sprite(labelMaterial);
+  label.width += 100;
+
+  const labelBaseScale = 0.01;
+  label.scale.x = canvas.width  * labelBaseScale;
+  label.scale.y = canvas.height * labelBaseScale;
+
+  label.position.y = 0;
+  label.position.z = 1;
+
+  return label;
 }
 
 function floorPlan() {
@@ -50,27 +73,9 @@ function floorPlan() {
   family.rotation.x = -(Math.PI / 2);
   family.position.y += 0.01;
 
-
   // Living Room Label
-  const canvas = makeLabelCanvas(159, 32, 'Living Room');
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.minFilter = THREE.LinearFilter;
-
-  const labelMaterial = new THREE.SpriteMaterial({
-    map: texture,
-    transparent: true,
-  });
-
-  const label = new THREE.Sprite(labelMaterial);
-  label.width += 100;
-
-  const labelBaseScale = 0.01;
-  label.scale.x = canvas.width  * labelBaseScale;
-  label.scale.y = canvas.height * labelBaseScale;
-
-  family.add(label);
-  label.position.y = 0;
-  label.position.z = 1;
+  const livingRoomCanvas = makeLabelCanvas(200, 40, 'Living Room');
+  family.add(newLabel(livingRoomCanvas));
 
   //This is the master bed (red)
   var bed1_material = new THREE.MeshLambertMaterial();
@@ -81,7 +86,11 @@ function floorPlan() {
   bed1.rotation.x -= (Math.PI / 2);
   bed1.position.y += 0.01;
 
-  //This is the 2nd bedroom
+  // Master  bedroom Label
+  const bed1RoomCanvas = makeLabelCanvas(200, 40, 'Master Bedroom');
+  bed1.add(newLabel(bed1RoomCanvas));
+
+  //This is the 2nd bedroom - green
   var bed2_material = new THREE.MeshLambertMaterial();
   bed2_material.color = new THREE.Color(0, 0.9, 0);
   bed2_material.wireframe = false;
@@ -90,7 +99,11 @@ function floorPlan() {
   bed2.rotation.x -= (Math.PI / 2);
   bed2.position.y += 0.01;
 
-  //This is the 3rd bedroom
+   // 2nd bedroom Label
+   const bed2RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom');
+   bed2.add(newLabel(bed2RoomCanvas));
+
+  //This is the 3rd bedroom - yellow
   var bed3_material = new THREE.MeshLambertMaterial();
   bed3_material.color = new THREE.Color(0.9, 0.9, 0);
   bed3_material.wireframe = false;
@@ -98,6 +111,10 @@ function floorPlan() {
   var bed3 = new THREE.Mesh(bed3_geometry, bed3_material);
   bed3.rotation.x -= (Math.PI / 2);
   bed3.position.y += 0.01;
+
+  // 3rd bedroom Label
+  const bed3RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom');
+  bed3.add(newLabel(bed3RoomCanvas));
 
   //This is the toilet
   var toilet_material = new THREE.MeshLambertMaterial();
@@ -108,6 +125,10 @@ function floorPlan() {
   toilet.rotation.x -= (Math.PI / 2);
   toilet.position.y += 0.01;
 
+  // Toilet  Label
+  const toiletRoomCanvas = makeLabelCanvas(200, 40, 'Laundry');
+  toilet.add(newLabel(toiletRoomCanvas));
+
   //This is the bathroom
   var bathroom_material = new THREE.MeshLambertMaterial();
   bathroom_material.color = new THREE.Color(0, 0, 0.9);
@@ -117,6 +138,10 @@ function floorPlan() {
   bathroom.rotation.x -= (Math.PI / 2);
   bathroom.position.y += 0.01;
 
+  // Toilet  Label
+  const bathroomCanvas = makeLabelCanvas(200, 40, 'Bathroom');
+  bathroom.add(newLabel(bathroomCanvas));
+
   //This is the kitchen
   var kitchen_material = new THREE.MeshLambertMaterial();
   kitchen_material.color = new THREE.Color(0.9, 0, 0.9);
@@ -125,6 +150,10 @@ function floorPlan() {
   var kitchen = new THREE.Mesh(kitchen_geometry, kitchen_material);
   kitchen.rotation.x -= (Math.PI / 2);
   kitchen.position.y += 0.01;
+
+  // Toilet  Label
+  const kitchenCanvas = makeLabelCanvas(200, 40, 'Kitchen');
+  kitchen.add(newLabel(kitchenCanvas));
 
   family.position.x -= 5;
   family.position.z += 0.01;

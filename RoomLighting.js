@@ -14,4 +14,4 @@ spotlight.penumbra = 0.3;
 spotlight.castShadow = true;
 scene.add(spotlight);
 var spotLightHelper = new THREE.SpotLightHelper(spotlight);
-scene.add(spotLightHelper);
+//scene.add(spotLightHelper);
