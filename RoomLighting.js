@@ -8,8 +8,7 @@ var ambientlight = new THREE.AmbientLight(new THREE.Color(1, 1, 1), 0.2);
 scene.add(ambientlight);
 
 var spotlight = new THREE.SpotLight(new THREE.Color(1, 1, 1), 0.5);
-spotlight.position.x = 10;
-spotlight.position.z = 90;
+spotlight.position.y = 30;
 spotlight.angle = Math.PI / 8;
 spotlight.penumbra = 0.3;
 spotlight.castShadow = true;
