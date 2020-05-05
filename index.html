@@ -10,9 +10,8 @@
   <script src="js/three.js"></script>
   <script src="js/OrbitControls.js"></script>
   <script src="js/dat.gui.min.js"></script>
-  <script src="js/OBJLoader.js"></script>
-  <script src="js/MTLLoader.js"></script>
   <script src="js/PLYLoader.js"></script>
+  <!-- <script type="module" src="js/CSS2DRenderer.js"></script> -->
 
   <div id="info">
     <p>Computer Graphics (Group 7) - Interior Design Simulator</p>
@@ -24,31 +23,7 @@
   <script src="RoomLighting.js"> </script>
   <script>
 
-    //This is the cube or player object
-    var cube_material = new THREE.MeshLambertMaterial();
-    cube_material.color = new THREE.Color(0, 1, 0);
-    cube_material.wireframe = false;
-    var cube_geometry = new THREE.BoxGeometry(1, 1, 1);
-    var cube = new THREE.Mesh(cube_geometry, cube_material);
-
-    cube.position.z = 1;
-    cube.receiveShadow = true;
-    cube.castShadow = true;
-
     floorPlan();
-
-    // Matt's Task - Furniture 
-    // var mtlLoader = new THREE.MTLLoader();
-    // mtlLoader.load('models/sofa2.mtl', function (materials) {
-
-    //   materials.preload();
-    //   var objLoader = new THREE.OBJLoader();
-    //   objLoader.setMaterials(materials);
-
-    //   objLoader.load('models/sofa2.obj', function (mesh) {
-    //     scene.add(mesh);
-    //   });
-    // });
 
     var loader = new THREE.PLYLoader();
     var mesh = null;
@@ -57,6 +32,7 @@
       material.color = new THREE.Color(0.8,1,1);
       material.wireframe = false;
       mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.x -= (Math.PI / 2); 
       geometry.computeVertexNormals();
       scene.add(mesh);
 
@@ -64,8 +40,21 @@
     
 
     // GUI ///
-    var guiControls = new dat.GUI();
-    guiControls.add(spotlight, 'intensity', 0, 1);
+    //var guiControls = new dat.GUI();
+    //guiControls.add(spotlight, 'intensity', 0, 1);
+
+    var gui;
+    function buildGUI(){
+      gui = new dat.GUI();
+      var params = {
+        room_lighting: spotlight.intensity
+      }
+      gui.add(params, 'room_lighting', 0, 1).onChange(function(val){
+        spotlight.intensity = val;
+      });
+      gui.open();
+    }
+    buildGUI();
 
   </script>
 
