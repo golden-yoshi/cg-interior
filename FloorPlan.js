@@ -1,6 +1,6 @@
 function floorPlan() {
   const loader = new THREE.TextureLoader();
-
+    
     //This is the whole floor
     var centre_material = new THREE.MeshLambertMaterial({map: loader.load('concrete.jpg')});
     centre_material.wireframe = false;
