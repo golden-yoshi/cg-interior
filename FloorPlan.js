@@ -53,6 +53,24 @@ function newLabel(canvas) {
   return label;
 }
 
+function makeWall(rotationX,rotationY,x,z,side1,side2)
+{
+  var mesh_material = new THREE.MeshLambertMaterial();
+  mesh_material.side = THREE.DoubleSide;
+  mesh_material.wireframe = false;
+  var mesh_geometry = new THREE.PlaneGeometry(side1, side2);
+  var mesh = new THREE.Mesh(mesh_geometry, mesh_material);
+  mesh.rotation.x = +(rotationX);
+  mesh.rotation.y = rotationY;
+  mesh.position.x = x;
+  mesh.position.y = 2.5;
+  mesh.position.z = z;
+  console.log("workin");
+  scene.add(mesh);
+  return mesh;  
+}
+
+
 function floorPlan() {
 
   const loader = new THREE.TextureLoader();
@@ -61,21 +79,19 @@ function floorPlan() {
   var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
   centre_material.wireframe = false;
   centre_material.side = THREE.DoubleSide;
-  var centre_geometry = new THREE.PlaneGeometry(20, 20, 20, 20);
+  var centre_geometry = new THREE.PlaneGeometry(20, 20);
   var centre = new THREE.Mesh(centre_geometry, centre_material);
   centre.rotation.x = -(Math.PI / 2);
 
   //This is the living room
   var family_material = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
   family_material.wireframe = false;
-  var family_geometry = new THREE.PlaneGeometry(10, 10, 10, 10);
+  var family_geometry = new THREE.PlaneGeometry(10, 10);
   var family = new THREE.Mesh(family_geometry, family_material);
   family.rotation.x = -(Math.PI / 2);
   family.position.y += 0.01;
 
-  var wall = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
-
-  // Living Room Label
+  //Living Room Label
   const livingRoomCanvas = makeLabelCanvas(200, 40, 'Living Room');
   family.add(newLabel(livingRoomCanvas));
 
@@ -151,6 +167,43 @@ function floorPlan() {
   const kitchenCanvas = makeLabelCanvas(200, 40, 'Kitchen');
   kitchen.add(newLabel(kitchenCanvas));
 
+  //Walls of Bedroom 1
+  var b1w1 = makeWall(Math.PI,0,-7.5,-10,5,5);
+  var b1w2 = makeWall(0,Math.PI/2,-5,-7.5,5,5);
+  var b1w3 = makeWall(Math.PI,0,-7.5,-5,5,5);
+  var b1w4 = makeWall(0,Math.PI/2,-10,-7.5,5,5);
+
+  //Walls of Bedroom 2
+  var b2w1 = makeWall(Math.PI,0,-2.5,-10,5,5);
+  var b2w2 = makeWall(0,Math.PI/2,0,-7.5,5,5);
+  var b2w3 = makeWall(Math.PI,0,-2.5,-5,5,5);
+  var b2w4 = makeWall(0,Math.PI/2,-5,-7.5,5,5);
+
+  //Walls of Master Bedroom
+  var mbw1 = makeWall(Math.PI,0,-6.25,5,7.5,5);
+  var mbw2 = makeWall(0,Math.PI/2,-2.5,7.5,5,5);
+  var mbw3 = makeWall(Math.PI,0,-6.25,10,7.5,5);
+  var mbw4 = makeWall(0,Math.PI/2,-10,7.5,5,5);
+
+  //Walls of Living Room
+  var livingRw1 = makeWall(Math.PI,0,-5,-5,10,5);
+  var livingRw2 = makeWall(0,Math.PI/2,0,0,10,5);
+  var livingRw3 = makeWall(Math.PI,0,-5,5,10,5);
+  var livingRw4 = makeWall(0,Math.PI/2,-10,0,10,5);
+
+  //Walls of the Kitchen
+  var kitchenw1 = makeWall(Math.PI,0,5,-5,10,5);
+  var kitchenw2 = makeWall(0,Math.PI/2,10,-2.5,5,5);
+  var kitchenw3 = makeWall(Math.PI,0,5,0,10,5);
+  var kitchenw4 = makeWall(0,Math.PI/2,0,-2.5,5,5);
+
+  //Walls of the Bathroom/Laundry
+  var bLw1 = makeWall(Math.PI,0,5,0,10,5);
+  var bLw2 = makeWall(0,Math.PI/2,10,2.5,5,5);
+  var bLw3 = makeWall(Math.PI,0,5,5,10,5);
+  var bLw4 = makeWall(0,Math.PI/2,0,2.5,5,5);
+
+
   family.position.x -= 5;
   family.position.z += 0.01;
   family.receiveShadow = true;
@@ -188,8 +241,7 @@ function floorPlan() {
 
   scene.add(centre);
   scene.add(family);
-  scene.add(bed1);
-  scene.add(bed2);
+  scene.add(bed1,bed2,bed3);
   scene.add(bed3);
   scene.add(kitchen);
   scene.add(toilet);
