@@ -57,59 +57,99 @@ function floorPlan() {
 
   const loader = new THREE.TextureLoader();
 
-  //     //This is the whole floor
-  var centre_material = new THREE.MeshLambertMaterial({map: loader.load('concrete.jpg')});
+  //This is the whole floor
+  var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
   centre_material.wireframe = false;
   centre_material.side = THREE.DoubleSide;
   var centre_geometry = new THREE.PlaneGeometry(20, 20, 20, 20);
   var centre = new THREE.Mesh(centre_geometry, centre_material);
+  centre.rotation.x = -(Math.PI / 2);
 
   //This is the living room
-  var family_material = new THREE.MeshLambertMaterial({map: loader.load('tiles.jpg')});
-  family_material.wireframe = false;  
+  var family_material = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
+  family_material.wireframe = false;
   var family_geometry = new THREE.PlaneGeometry(10, 10, 10, 10);
   var family = new THREE.Mesh(family_geometry, family_material);
+  family.rotation.x = -(Math.PI / 2);
+  family.position.y += 0.01;
 
-  var wall = new THREE.MeshLambertMaterial({map: loader.load('tiles.jpg')});
-  family_material.wireframe = false;  
-  var family_geometry = new THREE.PlaneGeometry(10, 10, 10, 10);
-  var family = new THREE.Mesh(family_geometry, family_material);
+  var wall = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
+
+  // Living Room Label
+  const livingRoomCanvas = makeLabelCanvas(200, 40, 'Living Room');
+  family.add(newLabel(livingRoomCanvas));
 
   //This is the master bed (red)
-  var bed1_material = new THREE.MeshLambertMaterial({map: loader.load('wood.jpg')});
+  var bed1_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
   bed1_material.wireframe = false;
   var bed1_geometry = new THREE.PlaneGeometry(7.5, 5);
   var bed1 = new THREE.Mesh(bed1_geometry, bed1_material);
+  bed1.rotation.x -= (Math.PI / 2);
+  bed1.position.y += 0.01;
+
+  // Master  bedroom Label
+  const bed1RoomCanvas = makeLabelCanvas(200, 40, 'Master Bedroom');
+  bed1.add(newLabel(bed1RoomCanvas));
 
   //This is the 2nd bedroom
-  var bed2_material = new THREE.MeshLambertMaterial({map: loader.load('wood.jpg')});
+  var bed2_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
   bed2_material.wireframe = false;
   var bed2_geometry = new THREE.PlaneGeometry(5, 5);
   var bed2 = new THREE.Mesh(bed2_geometry, bed2_material);
+  bed2.rotation.x -= (Math.PI / 2);
+  bed2.position.y += 0.01;
+
+  // 2nd bedroom Label
+  const bed2RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom');
+  bed2.add(newLabel(bed2RoomCanvas));
 
   //This is the 3rd bedroom
-  var bed3_material = new THREE.MeshLambertMaterial({map: loader.load('wood.jpg')});
+  var bed3_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
   bed3_material.wireframe = false;
   var bed3_geometry = new THREE.PlaneGeometry(5, 5);
   var bed3 = new THREE.Mesh(bed3_geometry, bed3_material);
+  bed3.rotation.x -= (Math.PI / 2);
+  bed3.position.y += 0.01;
+
+  // 3rd bedroom Label
+  const bed3RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom');
+  bed3.add(newLabel(bed3RoomCanvas));
 
   //This is the toilet
-  var toilet_material = new THREE.MeshLambertMaterial({map: loader.load('tileswhite.png')});
+  var toilet_material = new THREE.MeshLambertMaterial({ map: loader.load('tileswhite.png') });
   toilet_material.wireframe = false;
   var toilet_geometry = new THREE.PlaneGeometry(10, 2.5);
   var toilet = new THREE.Mesh(toilet_geometry, toilet_material);
+  toilet.rotation.x -= (Math.PI / 2);
+  toilet.position.y += 0.01;
+
+  // Toilet  Label
+  const toiletRoomCanvas = makeLabelCanvas(200, 40, 'Laundry');
+  toilet.add(newLabel(toiletRoomCanvas));
 
   //This is the bathroom
-  var bathroom_material = new THREE.MeshLambertMaterial({map: loader.load('tileswhite.png')});
+  var bathroom_material = new THREE.MeshLambertMaterial({ map: loader.load('tileswhite.png') });
   bathroom_material.wireframe = false;
   var bathroom_geometry = new THREE.PlaneGeometry(10, 2.5);
   var bathroom = new THREE.Mesh(bathroom_geometry, bathroom_material);
+  bathroom.rotation.x -= (Math.PI / 2);
+  bathroom.position.y += 0.01;
+
+  // Toilet  Label
+  const bathroomCanvas = makeLabelCanvas(200, 40, 'Bathroom');
+  bathroom.add(newLabel(bathroomCanvas));
 
   //This is the kitchen
-  var kitchen_material = new THREE.MeshLambertMaterial({map: loader.load('tiles.jpg')});
+  var kitchen_material = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
   kitchen_material.wireframe = false;
   var kitchen_geometry = new THREE.PlaneGeometry(10, 5);
   var kitchen = new THREE.Mesh(kitchen_geometry, kitchen_material);
+  kitchen.rotation.x -= (Math.PI / 2);
+  kitchen.position.y += 0.01;
+
+  // Toilet  Label
+  const kitchenCanvas = makeLabelCanvas(200, 40, 'Kitchen');
+  kitchen.add(newLabel(kitchenCanvas));
 
   family.position.x -= 5;
   family.position.z += 0.01;
@@ -117,42 +157,35 @@ function floorPlan() {
   family.castShadow = false;
 
   bed1.position.x -= 6.25;
-  bed1.position.y -= 7.5;
-  bed1.position.z += 0.01;
+  bed1.position.z += 7.5;
   bed1.receiveShadow = true;
   bed1.castShadow = false;
 
   bed2.position.x -= 7.5;
-  bed2.position.y += 7.5;
-  bed2.position.z += 0.01;
+  bed2.position.z -= 7.5;
   bed2.receiveShadow = true;
   bed2.castShadow = false;
 
   bed3.position.x -= 2.5;
-  bed3.position.y += 7.5;
-  bed3.position.z += 0.01;
+  bed3.position.z -= 7.5;
   bed3.receiveShadow = true;
   bed3.castShadow = false;
 
   toilet.position.x += 5;
-  toilet.position.y -= 1.25;
-  toilet.position.z += 0.01;
+  toilet.position.z += 1.25;
   toilet.receiveShadow = true;
   toilet.castShadow = false;
 
   bathroom.position.x += 5;
-  bathroom.position.y -= 3.75;
-  bathroom.position.z += 0.01;
+  bathroom.position.z += 3.75;
   bathroom.receiveShadow = true;
   bathroom.castShadow = false;
 
   kitchen.position.x += 5;
-  kitchen.position.y += 2.5;
-  kitchen.position.z += 0.01;
+  kitchen.position.z -= 2.5;
   kitchen.receiveShadow = true;
   kitchen.castShadow = false;
 
-  scene.add(cube);
   scene.add(centre);
   scene.add(family);
   scene.add(bed1);
