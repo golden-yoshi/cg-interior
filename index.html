@@ -1,24 +1,246 @@
 <html>
-  <head>
-    <title>Group 7 - Interior Design Simulator</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-  </head>
-  <body>
-    <!--include the three.js library-->
-    <script src="js/three.js"> </script>
 
-    <div id="info">
-      <p>Blank example using threeJS</p>
-    </div>
+<head>
+  <title>Group 7 - Interior Design Simulator</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
 
-    <script>
-      // Gunny's Task
+<body>
+  <!--Three.js , etc. libraries-->
+  <script src="js/three.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  <script src="js/dat.gui.min.js"></script>
+  <script src="js/PLYLoader.js"></script>
+  <script src="js/MTLLoader.js"></script>
+  <script src="js/inflate.min.js"></script>
 
-      // Mohamad's Task
+  <!-- <script type="module" src="js/CSS2DRenderer.js"></script> -->
 
-      // Matt's Task
-      
-    </script>
+  <div id="info">
+    <p>Computer Graphics (Group 7) - Interior Design Simulator</p>
+  </div>
 
-  </body>
+  <script src="InitScene.js"> </script>
+  <script src="ZoomControls.js"> </script>
+  <script src="FloorPlan.js"> </script>
+  <script src="RoomLighting.js"> </script>
+  <script>
+
+    floorPlan();
+
+    //laundry
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/washing machine.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial();
+      material.color = new THREE.Color(0.8,1,1);
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(1.5,1.3,1);
+      mesh.scale.set(0.5,0.5,0.5);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    });
+
+    //toilet
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/toilet.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0xc1c1c1});
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(4.4,0,1.3);
+      mesh.scale.set(0.03,0.03,0.03);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    });
+
+    //toilet sink
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/BathroomSink.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0xc1c1c1});
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.y = THREE.Math.degToRad(180);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(4,0,4.28);
+      mesh.scale.set(0.007,0.007,0.007);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    });
+
+    //bathroom
+    var geometry = new THREE.BoxGeometry( 3, 5, 4.8);
+    var material = new THREE.MeshBasicMaterial(
+      {color: 0xffffff,
+      transparent: true,
+      opacity: 0.4,
+      side: THREE.DoubleSide});
+    var cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+    cube.position.set(8.4,2.5,2.5);
+    cube.castShadow = true;
+    cube.receiveShadow = true;
+
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/shower/showertap.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0xc1c1c1});
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.y = THREE.Math.degToRad(90);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(8.4,3.4,4.32);
+      mesh.scale.set(0.02,0.02,0.02);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    });
+
+    //sofa
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/sofa2.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0x7a755b});
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.x -= (Math.PI / 2);
+      mesh.rotation.z -= (Math.PI / 1.02);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.scale.set(2,2,2);
+      mesh.position.set(-8.4,0,0);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+    });
+
+    //Kitchen
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/kitchen.ply', function(geometry){
+      var texture = new THREE.TextureLoader().load('models/kitchen/Tex.jpg');
+      var material = new THREE.MeshStandardMaterial({ map: texture, flatShading: true });
+      var mesh = new THREE.Mesh(geometry, material);
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(6.7,0,-2.65);
+      mesh.scale.set(0.9,0.9,0.92);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+    });
+
+
+    //Bedroom 1
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/queenbed.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color:0x6d2c2c});
+      var mesh = new THREE.Mesh(geometry, material);
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.y = THREE.Math.degToRad(90);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(-6,0,-8);
+      mesh.scale.set(0.5,0.5,0.5);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+    });
+
+    //Stove
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/kitchen/stove1.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0xc4c4c4});
+      var mesh = new THREE.Mesh(geometry, material);
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(9,1,-3.3);
+      mesh.scale.set(0.05,0.05,0.05);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+    });
+
+    //Bedroom2
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/queenbed.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0x134259});
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.y = THREE.Math.degToRad(90);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(-1,0,-8);
+      mesh.scale.set(0.5,0.5,0.5);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    });
+
+
+    //center table
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/centertable.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0x303030});
+      mesh = new THREE.Mesh(geometry, material);
+      material.wireframe = false;
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(-5,0,-2);
+      mesh.scale.set(0.002,0.002,0.002);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+    });
+
+    //sofa2
+
+
+
+
+    // GUI ///
+    //var guiControls = new dat.GUI();
+    //guiControls.add(spotlight, 'intensity', 0, 1);
+
+    var gui;
+    function buildGUI(){
+      gui = new dat.GUI();
+      var params = {
+        room_lighting: spotlight.intensity
+      }
+      gui.add(params, 'room_lighting', 0, 1).onChange(function(val){
+        spotlight.intensity = val;
+      });
+      gui.open();
+    }
+    buildGUI();
+
+  </script>
+
+</body>
+
 </html>
