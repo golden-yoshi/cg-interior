@@ -13,6 +13,8 @@
   <script src="js/PLYLoader.js"></script>
   <script src="js/MTLLoader.js"></script>
   <script src="js/inflate.min.js"></script>
+  <script src="js/FBXLoader.js"></script>
+
 
   <!-- <script type="module" src="js/CSS2DRenderer.js"></script> -->
 
@@ -32,8 +34,7 @@
     var loader = new THREE.PLYLoader();
     var mesh = null;
     loader.load('models/washing machine.ply', function(geometry){
-      var material = new THREE.MeshLambertMaterial();
-      material.color = new THREE.Color(0.8,1,1);
+      var material = new THREE.MeshLambertMaterial({color: 0xc1c1c1});
       material.wireframe = false;
       mesh = new THREE.Mesh(geometry, material);
       geometry.computeVertexNormals();
@@ -217,7 +218,99 @@
 
     });
 
-    //sofa2
+    //master bedroom
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/queenbed.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color:0x2b3f1a});
+      var mesh = new THREE.Mesh(geometry, material);
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.y = THREE.Math.degToRad(270);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(-5.5,0,8);
+      mesh.scale.set(0.5,0.5,0.5);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+    });
+
+    //master bedroom sink
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/BathroomSink.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0xc1c1c1});
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.y = THREE.Math.degToRad(270);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(-9.5,0,5.6);
+      mesh.scale.set(0.0035,0.0035,0.0035);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    });
+
+    //masterbedroom Bathroom
+    var geometry = new THREE.BoxGeometry( 3, 5, 3.8);
+    var material = new THREE.MeshBasicMaterial(
+      {color: 0xffffff,
+      transparent: true,
+      opacity: 0.4,
+      side: THREE.DoubleSide});
+    var cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+    cube.position.set(-8.4,2.5,7);
+    cube.castShadow = true;
+    cube.receiveShadow = true;
+
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/shower/showertap.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0xc1c1c1});
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.y = THREE.Math.degToRad(90);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(0,0,0);
+      mesh.scale.set(0.02,0.02,0.02);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    });
+    //MB shower
+    var geometry = new THREE.BoxGeometry( 1.7, 3, 1.7);
+    var material = new THREE.MeshBasicMaterial(
+      {color: 0xffffff,
+        transparent: true,
+      opacity: 0.5,
+      side: THREE.DoubleSide});
+    var cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+    cube.position.set(-7.8,1.5,8);
+    cube.castShadow = true;
+    cube.receiveShadow = true;
+
+    //master bedroom toilet
+    var loader = new THREE.PLYLoader();
+    var mesh = null;
+    loader.load('models/toilet.ply', function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0xc1c1c1});
+      material.wireframe = false;
+      mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.y = THREE.Math.degToRad(180);
+      geometry.computeVertexNormals();
+      scene.add(mesh);
+      mesh.position.set(-9.6,0,8.2);
+      mesh.scale.set(0.015,0.015,0.015);
+
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    });
 
 
 
