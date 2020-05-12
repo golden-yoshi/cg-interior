@@ -181,7 +181,7 @@ function floorPlan() {
 
   //Walls of Master Bedroom
   var mbw1 = makeWall(Math.PI,0,-5,5,10,5);
-  var mbw2 = makeWall(0,Math.PI/2,-2.5,7.5,5,5);
+  var mbw2 = makeWall(0,Math.PI/2,0,7.5,5,5);
   var mbw3 = makeWall(Math.PI,0,-5,10,10,5);
   var mbw4 = makeWall(0,Math.PI/2,-10,7.5,5,5);
 
