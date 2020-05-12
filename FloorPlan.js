@@ -98,7 +98,7 @@ function floorPlan() {
   //This is the master bed (red)
   var bed1_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
   bed1_material.wireframe = false;
-  var bed1_geometry = new THREE.PlaneGeometry(7.5, 5);
+  var bed1_geometry = new THREE.PlaneGeometry(10, 5);
   var bed1 = new THREE.Mesh(bed1_geometry, bed1_material);
   bed1.rotation.x -= (Math.PI / 2);
   bed1.position.y += 0.01;
@@ -180,9 +180,9 @@ function floorPlan() {
   var b2w4 = makeWall(0,Math.PI/2,-5,-7.5,5,5);
 
   //Walls of Master Bedroom
-  var mbw1 = makeWall(Math.PI,0,-6.25,5,7.5,5);
+  var mbw1 = makeWall(Math.PI,0,-5,5,10,5);
   var mbw2 = makeWall(0,Math.PI/2,-2.5,7.5,5,5);
-  var mbw3 = makeWall(Math.PI,0,-6.25,10,7.5,5);
+  var mbw3 = makeWall(Math.PI,0,-5,10,10,5);
   var mbw4 = makeWall(0,Math.PI/2,-10,7.5,5,5);
 
   //Walls of Living Room
@@ -209,7 +209,7 @@ function floorPlan() {
   family.receiveShadow = true;
   family.castShadow = false;
 
-  bed1.position.x -= 6.25;
+  bed1.position.x -= 5;
   bed1.position.z += 7.5;
   bed1.receiveShadow = true;
   bed1.castShadow = false;
