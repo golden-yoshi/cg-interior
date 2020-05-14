@@ -65,15 +65,55 @@ function makeWall(rotationX,rotationY,x,z,side1,side2)
   mesh.position.x = x;
   mesh.position.y = 2.5;
   mesh.position.z = z;
-  console.log("workin");
   scene.add(mesh);
   return mesh;  
 }
 
+function makeFloor(material,width,height,x,z)
+{
+  var floor_material = material;
+  floor_material.wireframe = false;
+  var floor_geometry = new THREE.PlaneGeometry(width, height);
+  var floor = new THREE.Mesh(floor_geometry, floor_material);
+  floor_material.side = THREE.DoubleSide;
+
+  floor.rotation.x = -(Math.PI / 2);  
+  floor.position.y += 0.01;
+  floor.position.x = x;
+  floor.position.z = z;
+  floor.receiveShadow = true;
+  floor.castShadow = false;
+  console.log("working:");
+  scene.add(floor);
+  return floor;
+}
+
+function hideWall()
+{
+  arrayLoop(bed1Walls);
+}
+
+function showWall()
+{
+  scene.add();
+}
+
+function arrayLoop(array)
+{
+  var i;
+  for(i=0;i<array.lengths;i++)
+  {
+    scene.remove(array[i]);
+  }
+}
 
 function floorPlan() {
 
   const loader = new THREE.TextureLoader();
+  var concrete_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
+  var tiles_material = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
+  var white_material = new THREE.MeshLambertMaterial({ map: loader.load('tileswhite.png') });
+  var wood_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
 
   //This is the whole floor
   var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
@@ -83,170 +123,86 @@ function floorPlan() {
   var centre = new THREE.Mesh(centre_geometry, centre_material);
   centre.rotation.x = -(Math.PI / 2);
 
-  //This is the living room
-  var family_material = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
-  family_material.wireframe = false;
-  var family_geometry = new THREE.PlaneGeometry(10, 10);
-  var family = new THREE.Mesh(family_geometry, family_material);
-  family.rotation.x = -(Math.PI / 2);
-  family.position.y += 0.01;
+  var livingRoom = makeFloor(tiles_material,10,10,-5,0.01);
+  var masterBedroom = makeFloor(wood_material,10,5,-5,7.5);
+  var bed1 = makeFloor(wood_material,5,5,-7.5,-7.5);
+  var bed2 = makeFloor(wood_material,5,5,-2.5,-7.5);
+  var laundry = makeFloor(white_material,10,2.5,5,1.25);
+  var bathroom = makeFloor(white_material,10,2.5,5,3.75);
+  var kitchen = makeFloor(tiles_material,10,5,5,-2.5);
 
   //Living Room Label
   const livingRoomCanvas = makeLabelCanvas(200, 40, 'Living Room');
-  family.add(newLabel(livingRoomCanvas));
-
-  //This is the master bed (red)
-  var bed1_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
-  bed1_material.wireframe = false;
-  var bed1_geometry = new THREE.PlaneGeometry(10, 5);
-  var bed1 = new THREE.Mesh(bed1_geometry, bed1_material);
-  bed1.rotation.x -= (Math.PI / 2);
-  bed1.position.y += 0.01;
+  livingRoom.add(newLabel(livingRoomCanvas));
 
   // Master  bedroom Label
-  const bed1RoomCanvas = makeLabelCanvas(200, 40, 'Master Bedroom');
-  bed1.add(newLabel(bed1RoomCanvas));
-
-  //This is the 2nd bedroom
-  var bed2_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
-  bed2_material.wireframe = false;
-  var bed2_geometry = new THREE.PlaneGeometry(5, 5);
-  var bed2 = new THREE.Mesh(bed2_geometry, bed2_material);
-  bed2.rotation.x -= (Math.PI / 2);
-  bed2.position.y += 0.01;
+  const masterBedroomCanvas = makeLabelCanvas(200, 40, 'Master Bedroom');
+  masterBedroom.add(newLabel(masterBedroomCanvas));
 
   // 2nd bedroom Label
-  const bed2RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom');
-  bed2.add(newLabel(bed2RoomCanvas));
-
-  //This is the 3rd bedroom
-  var bed3_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
-  bed3_material.wireframe = false;
-  var bed3_geometry = new THREE.PlaneGeometry(5, 5);
-  var bed3 = new THREE.Mesh(bed3_geometry, bed3_material);
-  bed3.rotation.x -= (Math.PI / 2);
-  bed3.position.y += 0.01;
+  const bed1RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom 1');
+  bed1.add(newLabel(bed1RoomCanvas));
 
   // 3rd bedroom Label
-  const bed3RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom');
-  bed3.add(newLabel(bed3RoomCanvas));
+  const bed2RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom 2');
+  bed2.add(newLabel(bed2RoomCanvas));
 
-  //This is the toilet
-  var toilet_material = new THREE.MeshLambertMaterial({ map: loader.load('tileswhite.png') });
-  toilet_material.wireframe = false;
-  var toilet_geometry = new THREE.PlaneGeometry(10, 2.5);
-  var toilet = new THREE.Mesh(toilet_geometry, toilet_material);
-  toilet.rotation.x -= (Math.PI / 2);
-  toilet.position.y += 0.01;
+  // Laundry Label
+  const laundryRoomCanvas = makeLabelCanvas(200, 40, 'Laundry');
+  laundry.add(newLabel(laundryRoomCanvas));
 
-  // Toilet  Label
-  const toiletRoomCanvas = makeLabelCanvas(200, 40, 'Laundry');
-  toilet.add(newLabel(toiletRoomCanvas));
-
-  //This is the bathroom
-  var bathroom_material = new THREE.MeshLambertMaterial({ map: loader.load('tileswhite.png') });
-  bathroom_material.wireframe = false;
-  var bathroom_geometry = new THREE.PlaneGeometry(10, 2.5);
-  var bathroom = new THREE.Mesh(bathroom_geometry, bathroom_material);
-  bathroom.rotation.x -= (Math.PI / 2);
-  bathroom.position.y += 0.01;
-
-  // Toilet  Label
+  // Bathroom  Label
   const bathroomCanvas = makeLabelCanvas(200, 40, 'Bathroom');
   bathroom.add(newLabel(bathroomCanvas));
-
-  //This is the kitchen
-  var kitchen_material = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
-  kitchen_material.wireframe = false;
-  var kitchen_geometry = new THREE.PlaneGeometry(10, 5);
-  var kitchen = new THREE.Mesh(kitchen_geometry, kitchen_material);
-  kitchen.rotation.x -= (Math.PI / 2);
-  kitchen.position.y += 0.01;
 
   // Toilet  Label
   const kitchenCanvas = makeLabelCanvas(200, 40, 'Kitchen');
   kitchen.add(newLabel(kitchenCanvas));
 
   //Walls of Bedroom 1
-  var b1w1 = makeWall(Math.PI,0,-7.5,-10,5,5);
-  var b1w2 = makeWall(0,Math.PI/2,-5,-7.5,5,5);
-  var b1w3 = makeWall(Math.PI,0,-7.5,-5,5,5);
-  var b1w4 = makeWall(0,Math.PI/2,-10,-7.5,5,5);
+  var bed1Walls = [3];
+  bed1Walls[0] = makeWall(Math.PI,0,-7.5,-10,5,5);
+  bed1Walls[1] = makeWall(Math.PI,0,-7.5,-10,5,5);
+  bed1Walls[2] = makeWall(Math.PI,0,-7.5,-10,5,5);
+  bed1Walls[3] = makeWall(0,Math.PI/2,-10,-7.5,5,5);
 
   //Walls of Bedroom 2
-  var b2w1 = makeWall(Math.PI,0,-2.5,-10,5,5);
-  var b2w2 = makeWall(0,Math.PI/2,0,-7.5,5,5);
-  var b2w3 = makeWall(Math.PI,0,-2.5,-5,5,5);
-  var b2w4 = makeWall(0,Math.PI/2,-5,-7.5,5,5);
+  var bed2Walls = [3];
+  bed2Walls[0] = makeWall(Math.PI,0,-2.5,-10,5,5);
+  bed2Walls[1] = makeWall(0,Math.PI/2,0,-7.5,5,5);
+  bed2Walls[2] = makeWall(Math.PI,0,-2.5,-5,5,5);
+  bed2Walls[3] = makeWall(0,Math.PI/2,-5,-7.5,5,5);
 
   //Walls of Master Bedroom
-  var mbw1 = makeWall(Math.PI,0,-5,5,10,5);
-  var mbw2 = makeWall(0,Math.PI/2,0,7.5,5,5);
-  var mbw3 = makeWall(Math.PI,0,-5,10,10,5);
-  var mbw4 = makeWall(0,Math.PI/2,-10,7.5,5,5);
+  var masterBedWalls = [3];
+  masterBedWalls[0] = makeWall(Math.PI,0,-5,5,10,5);
+  masterBedWalls[1] = makeWall(0,Math.PI/2,0,7.5,5,5);
+  masterBedWalls[2] = makeWall(Math.PI,0,-5,10,10,5);
+  masterBedWalls[3] = makeWall(0,Math.PI/2,-10,7.5,5,5);
 
   //Walls of Living Room
-  var livingRw1 = makeWall(Math.PI,0,-5,-5,10,5);
-  var livingRw2 = makeWall(0,Math.PI/2,0,0,10,5);
-  var livingRw3 = makeWall(Math.PI,0,-5,5,10,5);
-  var livingRw4 = makeWall(0,Math.PI/2,-10,0,10,5);
+  var livingRoom = [2];
+  livingRoom[0] = makeWall(Math.PI,0,-5,-5,10,5);
+  livingRoom[1] = makeWall(Math.PI,0,-5,5,10,5);
+  livingRoom[2] = makeWall(0,Math.PI/2,-10,0,10,5);
 
   //Walls of the Kitchen
-  var kitchenw1 = makeWall(Math.PI,0,5,-5,10,5);
-  var kitchenw2 = makeWall(0,Math.PI/2,10,-2.5,5,5);
-  var kitchenw3 = makeWall(Math.PI,0,5,0,10,5);
-  var kitchenw4 = makeWall(0,Math.PI/2,0,-2.5,5,5);
+  var kitchenWalls = [2];
+  kitchenWalls[0] = makeWall(Math.PI,0,5,-5,10,5);
+  kitchenWalls[1] = makeWall(0,Math.PI/2,10,-2.5,5,5);
+  kitchenWalls[2] = makeWall(Math.PI,0,5,0,10,5);
 
   //Walls of the Bathroom/Laundry
-  var bLw1 = makeWall(Math.PI,0,5,0,10,5);
-  var bLw2 = makeWall(0,Math.PI/2,10,2.5,5,5);
-  var bLw3 = makeWall(Math.PI,0,5,5,10,5);
-  var bLw4 = makeWall(0,Math.PI/2,0,2.5,5,5);
+  var bLWalls = [3];
+  bLWalls[0] = makeWall(Math.PI,0,5,0,10,5);
+  bLWalls[1] = makeWall(0,Math.PI/2,10,2.5,5,5);
+  bLWalls[2] = makeWall(Math.PI,0,5,5,10,5);
+  bLWalls[3] = makeWall(0,Math.PI/2,0,2.5,5,5); 
 
-
-  family.position.x -= 5;
-  family.position.z += 0.01;
-  family.receiveShadow = true;
-  family.castShadow = false;
-
-  bed1.position.x -= 5;
-  bed1.position.z += 7.5;
-  bed1.receiveShadow = true;
-  bed1.castShadow = false;
-
-  bed2.position.x -= 7.5;
-  bed2.position.z -= 7.5;
-  bed2.receiveShadow = true;
-  bed2.castShadow = false;
-
-  bed3.position.x -= 2.5;
-  bed3.position.z -= 7.5;
-  bed3.receiveShadow = true;
-  bed3.castShadow = false;
-
-  toilet.position.x += 5;
-  toilet.position.z += 1.25;
-  toilet.receiveShadow = true;
-  toilet.castShadow = false;
-
-  bathroom.position.x += 5;
-  bathroom.position.z += 3.75;
-  bathroom.receiveShadow = true;
-  bathroom.castShadow = false;
-
-  kitchen.position.x += 5;
-  kitchen.position.z -= 2.5;
-  kitchen.receiveShadow = true;
-  kitchen.castShadow = false;
+  //Divider between bathroom and Laundry
+  var divider = makeWall(Math.PI,0,5,2.5,10,5);
 
   scene.add(centre);
-  scene.add(family);
-  scene.add(bed1,bed2,bed3);
-  scene.add(bed3);
-  scene.add(kitchen);
-  scene.add(toilet);
-  scene.add(bathroom);
-
   var roofVertices = [
     new THREE.Vector3(0, 10, 0), new THREE.Vector3(10, 15, 0), new THREE.Vector3(20, 10, 0),
     new THREE.Vector3(20, 10, 20), new THREE.Vector3(10, 15, 20), new THREE.Vector3(0, 10, 20)
