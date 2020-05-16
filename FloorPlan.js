@@ -1,4 +1,5 @@
 /**MakeLabelCanvas function src: https://threejsfundamentals.org/threejs/lessons/threejs-billboards.html */
+
 function makeLabelCanvas(baseWidth, size, name) {
   const borderSize = 2;
   const ctx = document.createElement('canvas').getContext('2d');
@@ -17,7 +18,6 @@ function makeLabelCanvas(baseWidth, size, name) {
   ctx.font = font;
   ctx.textBaseline = 'middle';
   ctx.textAlign = 'center';
-
   ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, width, height);
 
@@ -46,9 +46,10 @@ function newLabel(canvas) {
   const labelBaseScale = 0.01;
   label.scale.x = canvas.width * labelBaseScale;
   label.scale.y = canvas.height * labelBaseScale;
-
   label.position.y = 0;
   label.position.z = 1;
+
+  //label.visible = false;
 
   return label;
 }
@@ -107,6 +108,28 @@ function arrayLoop(array)
   }
 }
 
+// Create Room Label Sprites
+const livingRoomCanvas = makeLabelCanvas(200, 40, 'Living Room');
+const livingRoomLabel = newLabel(livingRoomCanvas);
+
+const masterBedroomCanvas = makeLabelCanvas(200, 40, 'Master Bedroom');
+const masterBedroomLabel = newLabel(masterBedroomCanvas);
+
+const bed1RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom 1');
+const bed1RoomLabel = newLabel(bed1RoomCanvas);
+
+const bed2RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom 2');
+const bed2RoomLabel = newLabel(bed2RoomCanvas);
+
+const laundryRoomCanvas = makeLabelCanvas(200, 40, 'Laundry');
+const laundryRoomLabel = newLabel(laundryRoomCanvas);
+
+const bathroomCanvas = makeLabelCanvas(200, 40, 'Bathroom');
+const bathroomLabel = newLabel(bathroomCanvas);
+
+const kitchenCanvas = makeLabelCanvas(200, 40, 'Kitchen');
+const kitchenLabel = newLabel(kitchenCanvas);
+
 function floorPlan() {
 
   const loader = new THREE.TextureLoader();
@@ -131,34 +154,14 @@ function floorPlan() {
   var bathroom = makeFloor(white_material,10,2.5,5,3.75);
   var kitchen = makeFloor(tiles_material,10,5,5,-2.5);
 
-  //Living Room Label
-  const livingRoomCanvas = makeLabelCanvas(200, 40, 'Living Room');
-
-  livingRoom.add(newLabel(livingRoomCanvas));
-
-  // Master  bedroom Label
-  const masterBedroomCanvas = makeLabelCanvas(200, 40, 'Master Bedroom');
-  masterBedroom.add(newLabel(masterBedroomCanvas));
-
-  // 2nd bedroom Label
-  const bed1RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom 1');
-  bed1.add(newLabel(bed1RoomCanvas));
-
-  // 3rd bedroom Label
-  const bed2RoomCanvas = makeLabelCanvas(200, 40, 'Bedroom 2');
-  bed2.add(newLabel(bed2RoomCanvas));
-
-  // Laundry Label
-  const laundryRoomCanvas = makeLabelCanvas(200, 40, 'Laundry');
-  laundry.add(newLabel(laundryRoomCanvas));
-
-  // Bathroom  Label
-  const bathroomCanvas = makeLabelCanvas(200, 40, 'Bathroom');
-  bathroom.add(newLabel(bathroomCanvas));
-
-  // Toilet  Label
-  const kitchenCanvas = makeLabelCanvas(200, 40, 'Kitchen');
-  kitchen.add(newLabel(kitchenCanvas));
+  // Add Room labels
+  livingRoom.add(livingRoomLabel);
+  masterBedroom.add(masterBedroomLabel);
+  bed1.add(bed1RoomLabel);
+  bed2.add(bed2RoomLabel);
+  laundry.add(laundryRoomLabel);
+  bathroom.add(bathroomLabel);
+  kitchen.add(kitchenLabel);
 
   //Walls of Bedroom 1
   var bed1Walls = [3];
