@@ -8,6 +8,7 @@ var UpdateLoop = function () {
     controls.update();
     //recursive call to update camera position from mouse change
     requestAnimationFrame(UpdateLoop);
+    // console.log(camera.position);
 };
 requestAnimationFrame(UpdateLoop);
 

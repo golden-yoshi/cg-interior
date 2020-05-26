@@ -14,7 +14,6 @@
   <script src="js/MTLLoader.js"></script>
   <script src="js/inflate.min.js"></script>
   <!-- <script src="js/FBXLoader.js"></script> -->
-
   <!-- <script type="module" src="js/CSS2DRenderer.js"></script> -->
 
   <div id="info">
@@ -25,6 +24,8 @@
   <script src="ZoomControls.js"> </script>
   <script src="FloorPlan.js"> </script>
   <script src="RoomLighting.js"> </script>
+  <script src="PlayerControls.js"></script>
+  <script src="SaveScreenshot.js"></script>
   <script>
 
     floorPlan();
@@ -317,12 +318,13 @@
       gui = new dat.GUI();
       var params = {
         room_lighting: spotlight.intensity,
-        show_room_labels: true
+        show_room_labels: true,
+        player_perspective: false
       }
       gui.add(params, 'room_lighting', 0, 1).onChange(function(val){
         spotlight.intensity = val;
       });
-      gui.add(params, 'show_room_labels' ).onChange(function(val){
+      gui.add(params, 'show_room_labels').onChange(function(val){
         livingRoomLabel.visible = val;
         masterBedroomLabel.visible = val;
         bed1RoomLabel.visible = val;
@@ -331,9 +333,26 @@
         bathroomLabel.visible = val;
         kitchenLabel.visible = val;
       });
+      gui.add(params, 'player_perspective').onChange(function(val){
+        if(val == true){
+          camera.position.set(playerPos.x, playerPos.y, playerPos.z);
+          controls.enabled = false;
+          //playerPerspective();
+        } else {
+          camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
+          controls.enabled = true;
+          //roomPerspective();
+        }
+      });
+      //gui.add(params, 'save')
       gui.open();
     }
     buildGUI();
+
+    var saveImg = { save_screenshot:function(){ 
+      saveAsImage();
+    }};
+    gui.add(saveImg,'save_screenshot');
 
   </script>
 

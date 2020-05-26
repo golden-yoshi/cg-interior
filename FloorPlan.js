@@ -49,8 +49,6 @@ function newLabel(canvas) {
   label.position.y = 0;
   label.position.z = 1;
 
-  //label.visible = false;
-
   return label;
 }
 
@@ -202,8 +200,6 @@ function floorPlan() {
   bLWalls[1] = makeWall(0,Math.PI/2,10,2.5,5,5);
   bLWalls[2] = makeWall(Math.PI,0,5,5,10,5);
   bLWalls[3] = makeWall(0,Math.PI/2,0,2.5,5,5); 
-
-  
 
   //Divider between bathroom and Laundry
   var divider = makeWall(Math.PI,0,5,2.5,10,5);
