@@ -21,10 +21,10 @@
   </div>
 
   <script src="InitScene.js"> </script>
-  <script src="ZoomControls.js"> </script>
+  <!-- <script src="ZoomControls.js"> </script> -->
   <script src="FloorPlan.js"> </script>
   <script src="RoomLighting.js"> </script>
-  <script src="PlayerControls.js"></script>
+  <!-- <script src="PlayerControls.js"></script> -->
   <script src="SaveScreenshot.js"></script>
   <script>
 
@@ -335,20 +335,18 @@
       });
       gui.add(params, 'player_perspective').onChange(function(val){
         if(val == true){
-          camera.position.set(playerPos.x, playerPos.y, playerPos.z);
           controls.enabled = false;
-          //playerPerspective();
+          playerCameraActive = true;
+          requestAnimationFrame(UpdateLoop);
         } else {
-          camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
           controls.enabled = true;
-          //roomPerspective();
+          playerCameraActive = false;
+          requestAnimationFrame(UpdateLoop);
         }
       });
-      //gui.add(params, 'save')
       gui.open();
     }
     buildGUI();
-
     var saveImg = { save_screenshot:function(){ 
       saveAsImage();
     }};

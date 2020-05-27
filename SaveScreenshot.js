@@ -1,8 +1,7 @@
 var strDownloadMime = "image/octet-stream";
 
 function saveAsImage() {
-    var imgData, imgNode;
-
+    var imgData;
     try {
         var strMime = "image/jpeg";
         imgData = renderer.domElement.toDataURL(strMime);
@@ -13,7 +12,6 @@ function saveAsImage() {
         console.log(e);
         return;
     }
-
 }
 
 var saveFile = function (strData, filename) {
