@@ -1,5 +1,6 @@
 /**MakeLabelCanvas function src: https://threejsfundamentals.org/threejs/lessons/threejs-billboards.html */
 
+// Create custom canvas texture 
 function makeLabelCanvas(baseWidth, size, name) {
   const borderSize = 2;
   const ctx = document.createElement('canvas').getContext('2d');
@@ -21,7 +22,7 @@ function makeLabelCanvas(baseWidth, size, name) {
   ctx.fillStyle = 'white';
   ctx.fillRect(0, 0, width, height);
 
-  // scale to fit but don't stretch
+  // scale to fit text but don't stretch
   const scaleFactor = Math.min(1, baseWidth / textWidth);
   ctx.translate(width / 2, height / 2);
   ctx.scale(scaleFactor, 1);
@@ -31,6 +32,7 @@ function makeLabelCanvas(baseWidth, size, name) {
   return ctx.canvas;
 }
 
+// Create new label sprite from canvas texture
 function newLabel(canvas) {
   const texture = new THREE.CanvasTexture(canvas);
   texture.minFilter = THREE.LinearFilter;

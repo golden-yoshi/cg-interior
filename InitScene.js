@@ -9,15 +9,13 @@ var cameraPos = new THREE.Vector3(-5, 30, 0);
 
 function init() {
     scene = new THREE.Scene();
-    // scene.background = new THREE.Color( 0xff0000 );
     camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 1000);
     camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
-    // camera.position.set(-7, 2.5, -0.2);
     camera.lookAt(0, 0, 1);
 
     renderer = new THREE.WebGLRenderer({
         preserveDrawingBuffer: true, alpha: true
-      });
+    });
     renderer.setClearColor( 0xffffff );
     renderer.setSize(width, height);
     renderer.shadowMap.enabled = true;
@@ -26,30 +24,6 @@ function init() {
     document.body.appendChild(renderer.domElement);
 }
 init();
-
-/// ** Skybox ** ///
-
-setSkybox();
-
-function setSkybox(){
-    var loader = new THREE.TextureLoader();
-
-    var materialArray = [];
-    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_ft.png') }));
-    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_bk.png') }));
-    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_up.png') }));
-    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_dn.png') }));
-    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_rt.png') }));
-    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_lf.png') }));
-
-    for (var i = 0; i < 6; i++){
-        materialArray[i].side = THREE.DoubleSide;
-    }
-        
-    var sky_geometry = new THREE.BoxGeometry(1000, 1000, 1000);
-    var skybox = new THREE.Mesh(sky_geometry, materialArray);
-    scene.add(skybox);
-}
 
 /// ** Zoom Orbital Controls ** ///
 
@@ -83,6 +57,7 @@ function renderScene() {
 
 //link the resize of the window to the update of the camera
 window.addEventListener('resize', MyResize);
+
 
 /////////////////// PLAYER CONTROLS: ////////////////////////
 
