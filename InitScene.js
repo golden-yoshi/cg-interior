@@ -9,14 +9,16 @@ var cameraPos = new THREE.Vector3(-5, 30, 0);
 
 function init() {
     scene = new THREE.Scene();
+    // scene.background = new THREE.Color( 0xff0000 );
     camera = new THREE.PerspectiveCamera(45, ratio, 0.1, 1000);
     camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
     // camera.position.set(-7, 2.5, -0.2);
     camera.lookAt(0, 0, 1);
 
     renderer = new THREE.WebGLRenderer({
-        preserveDrawingBuffer: true
+        preserveDrawingBuffer: true, alpha: true
       });
+    renderer.setClearColor( 0xffffff );
     renderer.setSize(width, height);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -25,11 +27,38 @@ function init() {
 }
 init();
 
+/// ** Skybox ** ///
+
+setSkybox();
+
+function setSkybox(){
+    var loader = new THREE.TextureLoader();
+
+    var materialArray = [];
+    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_ft.png') }));
+    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_bk.png') }));
+    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_up.png') }));
+    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_dn.png') }));
+    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_rt.png') }));
+    materialArray.push(new THREE.MeshLambertMaterial({ map: loader.load('img/sky_lf.png') }));
+
+    for (var i = 0; i < 6; i++){
+        materialArray[i].side = THREE.DoubleSide;
+    }
+        
+    var sky_geometry = new THREE.BoxGeometry(1000, 1000, 1000);
+    var skybox = new THREE.Mesh(sky_geometry, materialArray);
+    scene.add(skybox);
+}
+
 /// ** Zoom Orbital Controls ** ///
+
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 var UpdateLoop = function () {
     renderScene();
     controls.update();
+    controls.maxDistance = 140;
     //playerMovement();
     //recursive call to update camera position from mouse change
     requestAnimationFrame(UpdateLoop);
@@ -55,9 +84,7 @@ function renderScene() {
 //link the resize of the window to the update of the camera
 window.addEventListener('resize', MyResize);
 
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
-
-/////////////////////// PLAYER CONTROLS: ////////////////////////
+/////////////////// PLAYER CONTROLS: ////////////////////////
 
 var moveForward, moveBackward, moveLeft, moveRight = false;
 const clock = new THREE.Clock();
@@ -87,7 +114,7 @@ player.position.y = 1;
 // player.visible = false;
 scene.add(player);
 
-//playerMovement();
+playerMovement();
 
 function playerMovement() {
 
@@ -105,8 +132,8 @@ function playerMovement() {
             console.log("moveRight");
         }
         if (moveForward == true) {
-            //player.position.x += 0.1;
-            player.translateX(moveDistance);
+            player.position.x += 0.1;
+            //player.translateX(moveDistance);
             console.log("moveForward");
         }
         if (moveBackward == true) {
