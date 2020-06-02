@@ -3,8 +3,6 @@
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 var UpdateLoop = function () {
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
     //call the render with the scene and the camera
     renderer.render(scene, camera);
     controls.update();
