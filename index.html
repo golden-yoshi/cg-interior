@@ -13,9 +13,6 @@
   <script src="js/PLYLoader.js"></script>
   <script src="js/OBJLoader.js"></script>
   <script src="js/MTLLoader.js"></script>
-
-
-
   <!-- <script type="module" src="js/CSS2DRenderer.js"></script> -->
 
   <div id="info">
@@ -23,38 +20,59 @@
   </div>
 
   <script src="InitScene.js"> </script>
-  <script src="ZoomControls.js"> </script>
   <script src="FloorPlan.js"> </script>
   <script src="RoomLighting.js"> </script>
   <script src="Furnitures.js"></script>
   <script src="MoveObjects.js"></script>
+  <script src="SaveScreenshot.js"></script>
+  <script src="Skybox.js"> </script>
+  
   <script>
 
     floorPlan();
     furnitures();
     moveObjects();
 
-
-
-
-
-
-    // GUI ///
-    //var guiControls = new dat.GUI();
-    //guiControls.add(spotlight, 'intensity', 0, 1);
-
+    // GUI Controls ///
     var gui;
     function buildGUI(){
       gui = new dat.GUI();
       var params = {
-        room_lighting: spotlight.intensity
+        room_lighting: spotlight.intensity,
+        show_room_labels: true,
+        player_perspective: false
       }
       gui.add(params, 'room_lighting', 0, 1).onChange(function(val){
         spotlight.intensity = val;
       });
+      gui.add(params, 'show_room_labels').onChange(function(val){
+        livingRoomLabel.visible = val;
+        masterBedroomLabel.visible = val;
+        bed1RoomLabel.visible = val;
+        bed2RoomLabel.visible = val;
+        laundryRoomLabel.visible = val;
+        bathroomLabel.visible = val;
+        kitchenLabel.visible = val;
+      });
+      gui.add(params, 'player_perspective').onChange(function(val){
+        if(val == true){
+          controls.enabled = false;
+          playerCameraActive = true;
+          requestAnimationFrame(UpdateLoop);
+          // playerMovement();
+        } else {
+          controls.enabled = true;
+          playerCameraActive = false;
+          requestAnimationFrame(UpdateLoop);
+        }
+      });
       gui.open();
     }
     buildGUI();
+    var saveImg = { save_screenshot:function(){ 
+      saveAsImage();
+    }};
+    gui.add(saveImg,'save_screenshot');
 
   </script>
 
