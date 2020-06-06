@@ -40,11 +40,30 @@
       var params = {
         room_lighting: spotlight.intensity,
         show_room_labels: true,
+        sofa: sofaMaterial.color.getHex(),
+        master_bed: masterBedMaterial.color.getHex(),
+        bed1: bed1Material.color.getHex(),
+        bed2: bed2Material.color.getHex(),
         player_perspective: false
       }
       gui.add(params, 'room_lighting', 0, 1).onChange(function(val){
         spotlight.intensity = val;
       });
+
+      var colours = gui.addFolder('Furniture Colours');
+      colours.addColor(params, 'sofa' ).onChange(function(val){
+        sofaMaterial.color.setHex(val);
+      });
+      colours.addColor(params, 'master_bed' ).onChange(function(val){
+        masterBedMaterial.color.setHex(val);
+      });
+      colours.addColor(params, 'bed1' ).onChange(function(val){
+        bed1Material.color.setHex(val);
+      });
+      colours.addColor(params, 'bed2' ).onChange(function(val){
+        bed2Material.color.setHex(val);
+      });
+
       gui.add(params, 'show_room_labels').onChange(function(val){
         livingRoomLabel.visible = val;
         masterBedroomLabel.visible = val;
@@ -68,7 +87,7 @@
       });
       gui.open();
     }
-    buildGUI();
+    buildGUI();    
     var saveImg = { save_screenshot:function(){ 
       saveAsImage();
     }};
