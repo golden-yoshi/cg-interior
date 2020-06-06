@@ -1,0 +1,32 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 26.09.2018 20:58:03
+
+newmtl Plastic_white_
+	Ns 50.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000
+	illum 2
+	Ka 1.000000 1.000000 1.000000
+	Kd 1.000000 1.000000 1.000000
+	Ks 1.000000 1.000000 1.000000
+	Ke 0.050000 0.050000 0.050000
+	map_Ka pure-white-marble-texture-white-marble-texture-pure-white-marble-texture-fusion-pure-white.jpg
+	map_Kd pure-white-marble-texture-white-marble-texture-pure-white-marble-texture-fusion-pure-white.jpg
+
+newmtl Material__134
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka DISHWASHER.jpg
+	map_Kd DISHWASHER.jpg
+	map_bump DISHWASHER.jpg
+	bump DISHWASHER.jpg
