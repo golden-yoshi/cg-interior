@@ -129,6 +129,7 @@ function floorPlan() {
   var tiles_material = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
   var white_material = new THREE.MeshLambertMaterial({ map: loader.load('tileswhite.png') });
   var wood_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
+  var marble_material = new THREE.MeshLambertMaterial({ map: loader.load('marble.jpg') })
 
   //This is the whole floor
   var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
@@ -203,7 +204,8 @@ function floorPlan() {
     gui = new dat.GUI();
     var params = 
     {
-      show_walls_visible: true
+      show_walls_visible: true,
+      change_floor_texture: false
     }
     
     gui.add(params, 'show_walls_visible', 0, 1).onChange(function(val){
@@ -224,6 +226,13 @@ function floorPlan() {
     hideWall(bed1Walls);
     divider.visible = val;
     });
+
+    gui.add(params, 'change_floor_texture', 0, 1).onChange(function(val)
+    {
+    livingRoom.material = marble_material;
+    });
+
+
     gui.open();
   }
 
