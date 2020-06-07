@@ -89,15 +89,7 @@ function makeFloor(material,width,height,x,z)
   return floor;
 }
 
-function hideWall()
-{
-  arrayLoop(bed1Walls);
-}
 
-function showWall()
-{
-  scene.add();
-}
 
 function arrayLoop(array)
 {
@@ -164,31 +156,27 @@ function floorPlan() {
   kitchen.add(kitchenLabel);
 
   //Walls of Bedroom 1
-  var bed1Walls = [3];
+  var bed1Walls = [1];
   bed1Walls[0] = makeWall(Math.PI,0,-7.5,-10,5,5);
-  bed1Walls[1] = makeWall(Math.PI,0,-7.5,-10,5,5);
-  bed1Walls[2] = makeWall(Math.PI,0,-7.5,-10,5,5);
-  bed1Walls[3] = makeWall(0,Math.PI/2,-10,-7.5,5,5);
+  bed1Walls[1] = makeWall(0,Math.PI/2,-10,-7.5,5,5);
 
   //Walls of Bedroom 2
   var bed2Walls = [3];
   bed2Walls[0] = makeWall(Math.PI,0,-2.5,-10,5,5);
   bed2Walls[1] = makeWall(0,Math.PI/2,0,-7.5,5,5);
-  bed2Walls[2] = makeWall(Math.PI,0,-2.5,-5,5,5);
-  bed2Walls[3] = makeWall(0,Math.PI/2,-5,-7.5,5,5);
+  bed2Walls[2] = makeWall(0,Math.PI/2,-5,-7.5,5,5);
 
   //Walls of Master Bedroom
-  var masterBedWalls = [3];
-  masterBedWalls[0] = makeWall(Math.PI,0,-5,5,10,5);
-  masterBedWalls[1] = makeWall(0,Math.PI/2,0,7.5,5,5);
-  masterBedWalls[2] = makeWall(Math.PI,0,-5,10,10,5);
-  masterBedWalls[3] = makeWall(0,Math.PI/2,-10,7.5,5,5);
+  var masterBedWalls = [2];
+  masterBedWalls[0] = makeWall(0,Math.PI/2,0,7.5,5,5);
+  masterBedWalls[1] = makeWall(Math.PI,0,-5,10,10,5);
+  masterBedWalls[2] = makeWall(0,Math.PI/2,-10,7.5,5,5);
 
   //Walls of Living Room
-  var livingRoom = [2];
-  livingRoom[0] = makeWall(Math.PI,0,-5,-5,10,5);
-  livingRoom[1] = makeWall(Math.PI,0,-5,5,10,5);
-  livingRoom[2] = makeWall(0,Math.PI/2,-10,0,10,5);
+  var livingRoomWalls = [2];
+  livingRoomWalls[0] = makeWall(Math.PI,0,-5,-5,10,5);
+  livingRoomWalls[1] = makeWall(Math.PI,0,-5,5,10,5);
+  livingRoomWalls[2] = makeWall(0,Math.PI/2,-10,0,10,5);
 
   //Walls of the Kitchen
   var kitchenWalls = [2];
@@ -205,6 +193,41 @@ function floorPlan() {
 
   //Divider between bathroom and Laundry
   var divider = makeWall(Math.PI,0,5,2.5,10,5);
+
+  var AllWalls
+
+  var gui;
+  function buildGui()
+  {
+       
+    gui = new dat.GUI();
+    var params = 
+    {
+      show_walls_visible: true
+    }
+    
+    gui.add(params, 'show_walls_visible', 0, 1).onChange(function(val){
+    function hideWall(array)
+    {
+      var i;
+      
+      for (let i = 0; i < array.length; i++) 
+      {
+        array[i].visible = val;
+      }
+    }
+    hideWall(bLWalls);
+    hideWall(kitchenWalls);
+    hideWall(livingRoomWalls);
+    hideWall(masterBedWalls);
+    hideWall(bed2Walls);
+    hideWall(bed1Walls);
+    divider.visible = val;
+    });
+    gui.open();
+  }
+
+  buildGui();
 
   scene.add(centre);
   var roofVertices = [
