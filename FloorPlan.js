@@ -89,17 +89,6 @@ function makeFloor(material,width,height,x,z)
   return floor;
 }
 
-
-
-function arrayLoop(array)
-{
-  var i;
-  for(i=0;i<array.lengths;i++)
-  {
-    scene.remove(array[i]);
-  }
-}
-
 // Create Room Label Sprites
 const livingRoomCanvas = makeLabelCanvas(200, 40, 'Living Room');
 const livingRoomLabel = newLabel(livingRoomCanvas);
@@ -130,6 +119,8 @@ function floorPlan() {
   var white_material = new THREE.MeshLambertMaterial({ map: loader.load('tileswhite.png') });
   var wood_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
   var marble_material = new THREE.MeshLambertMaterial({ map: loader.load('marble.jpg') })
+  var marble2_material = new THREE.MeshLambertMaterial({ map: loader.load('marble2.jpg') })
+  var carpet_material = new THREE.MeshLambertMaterial({ map: loader.load('carpet.jpg') }) 
 
   //This is the whole floor
   var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
@@ -195,7 +186,7 @@ function floorPlan() {
   //Divider between bathroom and Laundry
   var divider = makeWall(Math.PI,0,5,2.5,10,5);
 
-  var AllWalls
+  var x = true;
 
   var gui;
   function buildGui()
@@ -229,12 +220,35 @@ function floorPlan() {
 
     gui.add(params, 'change_floor_texture', 0, 1).onChange(function(val)
     {
-    livingRoom.material = marble_material;
+      if(x)
+      {
+        livingRoom.material = marble2_material;
+        kitchen.material = marble2_material;
+        laundry.material = marble_material;
+        bathroom.material = marble_material;
+        bed1.material = carpet_material;
+        bed2.material = carpet_material;
+        masterBedroom = carpet_material;
+        x = !x;
+      }
+      
+      else if(!x)
+      {
+        livingRoom.material = tiles_material;
+        kitchen.material = tiles_material;
+        laundry.material = white_material;
+        bathroom.material = white_material;
+        bed1.material = wood_material;
+        bed2.material = wood_material;
+        masterBedroom = wood_material;
+        x = !x;
+      }
+      
     });
 
 
     gui.open();
-  }
+  } 
 
   buildGui();
 
