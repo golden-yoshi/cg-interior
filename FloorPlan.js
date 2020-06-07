@@ -56,7 +56,8 @@ function newLabel(canvas) {
 
 function makeWall(rotationX,rotationY,x,z,side1,side2)
 {
-  var mesh_material = new THREE.MeshLambertMaterial();
+  const loader = new THREE.TextureLoader();
+  var mesh_material = new THREE.MeshLambertMaterial({ map: loader.load('whiteWall.jpg') });
   mesh_material.side = THREE.DoubleSide;
   mesh_material.wireframe = false;
   var mesh_geometry = new THREE.PlaneGeometry(side1, side2);
@@ -121,6 +122,7 @@ function floorPlan() {
   var marble_material = new THREE.MeshLambertMaterial({ map: loader.load('marble.jpg') })
   var marble2_material = new THREE.MeshLambertMaterial({ map: loader.load('marble2.jpg') })
   var carpet_material = new THREE.MeshLambertMaterial({ map: loader.load('carpet.jpg') }) 
+  var whiteWall_material = new THREE.MeshLambertMaterial({ map: loader.load('whiteWall.jpg') })
 
   //This is the whole floor
   var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
