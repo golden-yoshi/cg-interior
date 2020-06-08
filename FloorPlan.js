@@ -6,7 +6,6 @@ function makeLabelCanvas(baseWidth, size, name) {
   const ctx = document.createElement('canvas').getContext('2d');
   const font = `${size}px bold sans-serif`;
   ctx.font = font;
-  
   // measure how long the name will be
   const textWidth = ctx.measureText(name).width;
 
