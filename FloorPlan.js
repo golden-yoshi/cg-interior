@@ -6,6 +6,7 @@ function makeLabelCanvas(baseWidth, size, name) {
   const ctx = document.createElement('canvas').getContext('2d');
   const font = `${size}px bold sans-serif`;
   ctx.font = font;
+  
   // measure how long the name will be
   const textWidth = ctx.measureText(name).width;
 
@@ -43,8 +44,8 @@ function newLabel(canvas) {
   });
 
   const label = new THREE.Sprite(labelMaterial);
-  label.width += 100;
 
+  // centre label on object
   const labelBaseScale = 0.01;
   label.scale.x = canvas.width * labelBaseScale;
   label.scale.y = canvas.height * labelBaseScale;

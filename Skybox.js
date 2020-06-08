@@ -1,3 +1,5 @@
+/*Skybox img source: https://opengameart.org/content/elyvisions-skyboxes */
+
 /** Set Background Skybox Texture */
 function setSkybox(){
     var loader = new THREE.TextureLoader();
@@ -18,5 +20,4 @@ function setSkybox(){
     var skybox = new THREE.Mesh(sky_geometry, materialArray);
     scene.add(skybox);
 }
-
 setSkybox();
