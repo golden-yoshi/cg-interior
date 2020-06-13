@@ -150,9 +150,10 @@ function floorPlan() {
   var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
   centre_material.wireframe = false;
   centre_material.side = THREE.DoubleSide;
-  var centre_geometry = new THREE.PlaneGeometry(20, 20);
+  var centre_geometry = new THREE.BoxGeometry(20, 20, 0.1);
   var centre = new THREE.Mesh(centre_geometry, centre_material);
   centre.rotation.x = -(Math.PI / 2);
+  centre.position.y -= 0.05;
 
   livingRoom = makeFloor(tiles_material,10,10,-5,0.01);
   masterBedroom = makeFloor(wood_material,10,5,-5,7.5);
@@ -203,76 +204,6 @@ function floorPlan() {
 
   //Divider between bathroom and Laundry
   divider = makeWall(Math.PI,0,5,2.5,10,5);
-
-  /*
-  
-  var x = true;
-
-  var gui;
-  function buildGui()
-  {
-       
-    gui = new dat.GUI();
-    var params = 
-    {
-      show_walls_visible: true,
-      change_floor_texture: false
-    }
-    
-    gui.add(params, 'show_walls_visible', 0, 1).onChange(function(val){
-    function hideWall(array)
-    {
-      var i;
-      
-      for (let i = 0; i < array.length; i++) 
-      {
-        array[i].visible = val;
-      }
-    }
-    hideWall(bLWalls);
-    hideWall(kitchenWalls);
-    hideWall(livingRoomWalls);
-    hideWall(masterBedWalls);
-    hideWall(bed2Walls);
-    hideWall(bed1Walls);
-    divider.visible = val;
-    });
-
-    gui.add(params, 'change_floor_texture', 0, 1).onChange(function(val)
-    {
-      if(x)
-      {
-        livingRoom.material = marble2_material;
-        kitchen.material = marble2_material;
-        laundry.material = marble_material;
-        bathroom.material = marble_material;
-        bed1.material = carpet_material;
-        bed2.material = carpet_material;
-        masterBedroom = carpet_material;
-        x = !x;
-      }
-      
-      else if(!x)
-      {
-        livingRoom.material = tiles_material;
-        kitchen.material = tiles_material;
-        laundry.material = white_material;
-        bathroom.material = white_material;
-        bed1.material = wood_material;
-        bed2.material = wood_material;
-        masterBedroom = wood_material;
-        x = !x;
-      }
-      
-    });
-
-
-    gui.open();
-  } 
-
-  buildGui();
-
-  */
 
   scene.add(centre);
   var roofVertices = [
