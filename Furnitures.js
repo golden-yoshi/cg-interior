@@ -606,7 +606,7 @@ function furnitures() {
     });
   });
 }
-var sofaMaterial = new THREE.MeshPhongMaterial;
-var bed1Material = new THREE.MeshPhongMaterial;
-var bed2Material = new THREE.MeshPhongMaterial;
-var masterBedMaterial = new THREE.MeshPhongMaterial;
+var sofaMaterial = new THREE.MeshBasicMaterial;
+var bed1Material = new THREE.MeshBasicMaterial;
+var bed2Material = new THREE.MeshBasicMaterial;
+var masterBedMaterial = new THREE.MeshBasicMaterial;

@@ -57,7 +57,7 @@ function newLabel(canvas) {
 function makeWall(rotationX,rotationY,x,z,side1,side2)
 {
   const loader = new THREE.TextureLoader();
-  var mesh_material = new THREE.MeshLambertMaterial({ map: loader.load('whiteWall.jpg') });
+  var mesh_material = new THREE.MeshLambertMaterial({ map: loader.load('img/whiteWall.jpg') });
   mesh_material.side = THREE.DoubleSide;
   mesh_material.wireframe = false;
   var mesh_geometry = new THREE.PlaneGeometry(side1, side2);
@@ -137,17 +137,17 @@ var divider;
 function floorPlan() {
 
   const loader = new THREE.TextureLoader();
-  concrete_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
-  tiles_material = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
-  white_material = new THREE.MeshLambertMaterial({ map: loader.load('tileswhite.png') });
-  wood_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
-  marble_material = new THREE.MeshLambertMaterial({ map: loader.load('marble.jpg') })
-  marble2_material = new THREE.MeshLambertMaterial({ map: loader.load('marble2.jpg') })
-  carpet_material = new THREE.MeshLambertMaterial({ map: loader.load('carpet.jpg') }) 
-  whiteWall_material = new THREE.MeshLambertMaterial({ map: loader.load('whiteWall.jpg') })
+  concrete_material = new THREE.MeshLambertMaterial({ map: loader.load('img/concrete.jpg') });
+  tiles_material = new THREE.MeshLambertMaterial({ map: loader.load('img/tiles.jpg') });
+  white_material = new THREE.MeshLambertMaterial({ map: loader.load('img/tileswhite.png') });
+  wood_material = new THREE.MeshLambertMaterial({ map: loader.load('img/wood.jpg') });
+  marble_material = new THREE.MeshLambertMaterial({ map: loader.load('img/marble.jpg') })
+  marble2_material = new THREE.MeshLambertMaterial({ map: loader.load('img/marble2.jpg') })
+  carpet_material = new THREE.MeshLambertMaterial({ map: loader.load('img/carpet.jpg') }) 
+  whiteWall_material = new THREE.MeshLambertMaterial({ map: loader.load('img/whiteWall.jpg') })
 
   //This is the whole floor
-  var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
+  var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('img/concrete.jpg') });
   centre_material.wireframe = false;
   centre_material.side = THREE.DoubleSide;
   var centre_geometry = new THREE.BoxGeometry(20, 20, 0.1);

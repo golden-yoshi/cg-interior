@@ -96,7 +96,6 @@ function buildGUI() {
 
 buildGUI();
 
-// IS DISAPPEARED??
 var saveImg = {
     save_screenshot: function () {
         saveAsImage();
