@@ -1,5 +1,3 @@
-/**MakeLabelCanvas function src: https://threejsfundamentals.org/threejs/lessons/threejs-billboards.html */
-
 // Create custom canvas texture 
 function makeLabelCanvas(baseWidth, size, name) {
   const borderSize = 2;
@@ -57,7 +55,7 @@ function newLabel(canvas) {
 function makeWall(rotationX,rotationY,x,z,side1,side2)
 {
   const loader = new THREE.TextureLoader();
-  var mesh_material = new THREE.MeshLambertMaterial({ map: loader.load('whiteWall.jpg') });
+  var mesh_material = new THREE.MeshLambertMaterial({ map: loader.load('img/whiteWall.jpg') });
   mesh_material.side = THREE.DoubleSide;
   mesh_material.wireframe = false;
   var mesh_geometry = new THREE.PlaneGeometry(side1, side2);
@@ -112,33 +110,56 @@ const bathroomLabel = newLabel(bathroomCanvas);
 const kitchenCanvas = makeLabelCanvas(200, 40, 'Kitchen');
 const kitchenLabel = newLabel(kitchenCanvas);
 
+// Rooms:
+var livingRoom, masterBedroom, bed1, bed2, laundy, bathroom, kitchen;
+
+// Room texures:
+var concrete_material;
+var tiles_material;
+var white_material;
+var wood_material; 
+var marble_material; 
+var marble2_material;
+var carpet_material;
+var whiteWall_material;
+
+// Wall Arrays:
+var bed1Walls = [1];
+var bed2Walls = [3];
+var masterBedWalls = [2];
+var livingRoomWalls = [2];
+var kitchenWalls = [2];
+var bLWalls = [3];
+var divider;
+
 function floorPlan() {
 
   const loader = new THREE.TextureLoader();
-  var concrete_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
-  var tiles_material = new THREE.MeshLambertMaterial({ map: loader.load('tiles.jpg') });
-  var white_material = new THREE.MeshLambertMaterial({ map: loader.load('tileswhite.png') });
-  var wood_material = new THREE.MeshLambertMaterial({ map: loader.load('wood.jpg') });
-  var marble_material = new THREE.MeshLambertMaterial({ map: loader.load('marble.jpg') })
-  var marble2_material = new THREE.MeshLambertMaterial({ map: loader.load('marble2.jpg') })
-  var carpet_material = new THREE.MeshLambertMaterial({ map: loader.load('carpet.jpg') }) 
-  var whiteWall_material = new THREE.MeshLambertMaterial({ map: loader.load('whiteWall.jpg') })
+  concrete_material = new THREE.MeshLambertMaterial({ map: loader.load('img/concrete.jpg') });
+  tiles_material = new THREE.MeshLambertMaterial({ map: loader.load('img/tiles.jpg') });
+  white_material = new THREE.MeshLambertMaterial({ map: loader.load('img/tileswhite.png') });
+  wood_material = new THREE.MeshLambertMaterial({ map: loader.load('img/wood.jpg') });
+  marble_material = new THREE.MeshLambertMaterial({ map: loader.load('img/marble.jpg') })
+  marble2_material = new THREE.MeshLambertMaterial({ map: loader.load('img/marble2.jpg') })
+  carpet_material = new THREE.MeshLambertMaterial({ map: loader.load('img/carpet.jpg') }) 
+  whiteWall_material = new THREE.MeshLambertMaterial({ map: loader.load('img/whiteWall.jpg') })
 
   //This is the whole floor
-  var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('concrete.jpg') });
+  var centre_material = new THREE.MeshLambertMaterial({ map: loader.load('img/concrete.jpg') });
   centre_material.wireframe = false;
   centre_material.side = THREE.DoubleSide;
-  var centre_geometry = new THREE.PlaneGeometry(20, 20);
+  var centre_geometry = new THREE.BoxGeometry(20, 20, 0.1);
   var centre = new THREE.Mesh(centre_geometry, centre_material);
   centre.rotation.x = -(Math.PI / 2);
+  centre.position.y -= 0.05;
 
-  var livingRoom = makeFloor(tiles_material,10,10,-5,0.01);
-  var masterBedroom = makeFloor(wood_material,10,5,-5,7.5);
-  var bed1 = makeFloor(wood_material,5,5,-7.5,-7.5);
-  var bed2 = makeFloor(wood_material,5,5,-2.5,-7.5);
-  var laundry = makeFloor(white_material,10,2.5,5,1.25);
-  var bathroom = makeFloor(white_material,10,2.5,5,3.75);
-  var kitchen = makeFloor(tiles_material,10,5,5,-2.5);
+  livingRoom = makeFloor(tiles_material,10,10,-5,0.01);
+  masterBedroom = makeFloor(wood_material,10,5,-5,7.5);
+  bed1 = makeFloor(wood_material,5,5,-7.5,-7.5);
+  bed2 = makeFloor(wood_material,5,5,-2.5,-7.5);
+  laundry = makeFloor(white_material,10,2.5,5,1.25);
+  bathroom = makeFloor(white_material,10,2.5,5,3.75);
+  kitchen = makeFloor(tiles_material,10,5,5,-2.5);
 
   // Add Room labels
   livingRoom.add(livingRoomLabel);
@@ -150,109 +171,37 @@ function floorPlan() {
   kitchen.add(kitchenLabel);
 
   //Walls of Bedroom 1
-  var bed1Walls = [1];
   bed1Walls[0] = makeWall(Math.PI,0,-7.5,-10,5,5);
   bed1Walls[1] = makeWall(0,Math.PI/2,-10,-7.5,5,5);
 
   //Walls of Bedroom 2
-  var bed2Walls = [3];
   bed2Walls[0] = makeWall(Math.PI,0,-2.5,-10,5,5);
   bed2Walls[1] = makeWall(0,Math.PI/2,0,-7.5,5,5);
   bed2Walls[2] = makeWall(0,Math.PI/2,-5,-7.5,5,5);
 
   //Walls of Master Bedroom
-  var masterBedWalls = [2];
   masterBedWalls[0] = makeWall(0,Math.PI/2,0,7.5,5,5);
   masterBedWalls[1] = makeWall(Math.PI,0,-5,10,10,5);
   masterBedWalls[2] = makeWall(0,Math.PI/2,-10,7.5,5,5);
 
   //Walls of Living Room
-  var livingRoomWalls = [2];
   livingRoomWalls[0] = makeWall(Math.PI,0,-5,-5,10,5);
   livingRoomWalls[1] = makeWall(Math.PI,0,-5,5,10,5);
   livingRoomWalls[2] = makeWall(0,Math.PI/2,-10,0,10,5);
 
   //Walls of the Kitchen
-  var kitchenWalls = [2];
   kitchenWalls[0] = makeWall(Math.PI,0,5,-5,10,5);
   kitchenWalls[1] = makeWall(0,Math.PI/2,10,-2.5,5,5);
   kitchenWalls[2] = makeWall(Math.PI,0,5,0,10,5);
 
   //Walls of the Bathroom/Laundry
-  var bLWalls = [3];
   bLWalls[0] = makeWall(Math.PI,0,5,0,10,5);
   bLWalls[1] = makeWall(0,Math.PI/2,10,2.5,5,5);
   bLWalls[2] = makeWall(Math.PI,0,5,5,10,5);
   bLWalls[3] = makeWall(0,Math.PI/2,0,2.5,5,5); 
 
   //Divider between bathroom and Laundry
-  var divider = makeWall(Math.PI,0,5,2.5,10,5);
-
-  var x = true;
-
-  var gui;
-  function buildGui()
-  {
-       
-    gui = new dat.GUI();
-    var params = 
-    {
-      show_walls_visible: true,
-      change_floor_texture: false
-    }
-    
-    gui.add(params, 'show_walls_visible', 0, 1).onChange(function(val){
-    function hideWall(array)
-    {
-      var i;
-      
-      for (let i = 0; i < array.length; i++) 
-      {
-        array[i].visible = val;
-      }
-    }
-    hideWall(bLWalls);
-    hideWall(kitchenWalls);
-    hideWall(livingRoomWalls);
-    hideWall(masterBedWalls);
-    hideWall(bed2Walls);
-    hideWall(bed1Walls);
-    divider.visible = val;
-    });
-
-    gui.add(params, 'change_floor_texture', 0, 1).onChange(function(val)
-    {
-      if(x)
-      {
-        livingRoom.material = marble2_material;
-        kitchen.material = marble2_material;
-        laundry.material = marble_material;
-        bathroom.material = marble_material;
-        bed1.material = carpet_material;
-        bed2.material = carpet_material;
-        masterBedroom = carpet_material;
-        x = !x;
-      }
-      
-      else if(!x)
-      {
-        livingRoom.material = tiles_material;
-        kitchen.material = tiles_material;
-        laundry.material = white_material;
-        bathroom.material = white_material;
-        bed1.material = wood_material;
-        bed2.material = wood_material;
-        masterBedroom = wood_material;
-        x = !x;
-      }
-      
-    });
-
-
-    gui.open();
-  } 
-
-  buildGui();
+  divider = makeWall(Math.PI,0,5,2.5,10,5);
 
   scene.add(centre);
   var roofVertices = [

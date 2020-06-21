@@ -43,7 +43,8 @@ THREE.OBJLoader.prototype = {
 
 		var scope = this;
 
-		var loader = new THREE.XHRLoader( scope.manager );
+		// var loader = new THREE.XHRLoader( scope.manager );
+		var loader = new THREE.FileLoader( scope.manager );
 		loader.setPath( this.path );
 		loader.load( url, function ( text ) {
 
@@ -676,7 +677,8 @@ THREE.OBJLoader.prototype = {
 
 				}
 
-				material.shading = sourceMaterial.smooth ? THREE.SmoothShading : THREE.FlatShading;
+				// material.shading = sourceMaterial.smooth ? THREE.SmoothShading : THREE.FlatShading;
+				material.flatShading = sourceMaterial.smooth ? THREE.SmoothShading : THREE.FlatShading;
 
 				createdMaterials.push(material);
 

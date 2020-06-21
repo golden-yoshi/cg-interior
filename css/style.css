@@ -17,3 +17,11 @@ canvas {
     width: 100%;
     text-align: center;
 }
+
+#player-controls {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+    visibility: hidden;
+}

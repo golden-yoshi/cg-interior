@@ -16,7 +16,7 @@ function init() {
     renderer = new THREE.WebGLRenderer({
         preserveDrawingBuffer: true, alpha: true
     });
-    renderer.setClearColor( 0xffffff );
+    renderer.setClearColor(0xffffff);
     renderer.setSize(width, height);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -48,7 +48,7 @@ var MyResize = function () {
 };
 
 function renderScene() {
-    if (playerCameraActive){
+    if (playerCameraActive) {
         renderer.render(scene, playerCamera);
     } else {
         renderer.render(scene, camera);
@@ -61,21 +61,22 @@ window.addEventListener('resize', MyResize);
 
 /////////////////// PLAYER CONTROLS: ////////////////////////
 
-var moveForward, moveBackward, moveLeft, moveRight = false;
+var moveForward, moveBackward, moveLeft, moveRight, lookLeft, lookRight = false;
 const clock = new THREE.Clock();
 var delta = clock.getDelta();
 var moveDistance = 200 * delta; // 200 pixels per second
 var rotateAngle = Math.PI / 2 * delta; // pi/2 radians (90 degrees) per second
 
-var player = { height: 1.8, speed: 0.2, turnSpeed: Math.PI * 0.02 };
+
+var playerEnabled = false;
 var playerPos = new THREE.Vector3(-7, 2.5, 0);
-var playerCamera = new THREE.PerspectiveCamera(45,ratio,0.1,1000);
+var playerCamera = new THREE.PerspectiveCamera(45, ratio, 0.1, 1000);
 var playerCameraActive = false;
 
-playerCamera.position.set(playerPos.x,playerPos.y,playerPos.z);
+playerCamera.position.set(playerPos.x, playerPos.y, playerPos.z);
 
 var Dir = new THREE.Vector3(0, 0, 0);
-playerCamera.lookAt(Dir.x,Dir.y,Dir.z);
+playerCamera.lookAt(Dir.x, Dir.y, Dir.z);
 
 //* PLAYER OBJECT */
 var material_player = new THREE.MeshBasicMaterial();
@@ -90,37 +91,46 @@ playerMovement();
 
 function playerMovement() {
 
+
     var UpdateLoop = function () {
 
-        if (moveLeft == true) 
-        {
-            //player.rotateOnAxis( new THREE.Vector3(0,1,0), rotateAngle);
-            player.rotation.y -= Math.PI / 50;
-            console.log("moveLeft");
+        if (playerEnabled == true) {
+
+            if (moveLeft == true) {
+                //player.rotation.y -= Math.PI / 50;
+                player.position.z -= 0.1;
+                console.log("moveLeft");
+            }
+            if (moveRight == true) {
+                //player.rotation.y += Math.PI / 50;
+                player.position.z += 0.1;
+                console.log("moveRight");
+            }
+            if (moveForward == true) {
+                player.position.x += 0.1;
+                console.log("moveForward");
+            }
+            if (moveBackward == true) {
+                player.position.x -= 0.1;
+                console.log("moveBackward");
+            }
+            if (lookLeft == true) {
+                player.rotation.y -= Math.PI / 50;
+            }
+            if (lookRight == true) {
+                player.rotation.y += Math.PI / 50;
+            }
+
         }
-        if (moveRight == true) 
-        {
-            player.rotation.y += Math.PI / 50;
-            console.log("moveRight");
-        }
-        if (moveForward == true) {
-            // player.position.x += 0.1;
-            //player.translateX(moveDistance);
-            console.log("moveForward");
-        }
-        if (moveBackward == true) {
-            // player.position.x -= 0.1;
-            //player.translateX(-moveDistance);
-            console.log("moveBackward");
-        }
+
         // Recompute direction
         // renderer.render(scene, playerCamera);
-        var relativeCameraOffset = new THREE.Vector3(-7,2.5,0);
-        var cameraOffset = relativeCameraOffset.applyMatrix4( player.matrixWorld );
+        var relativeCameraOffset = new THREE.Vector3(-7, 2.5, 0);
+        var cameraOffset = relativeCameraOffset.applyMatrix4(player.matrixWorld);
         playerCamera.position.x = cameraOffset.x;
         playerCamera.position.y = cameraOffset.y;
         playerCamera.position.z = cameraOffset.z;
-        playerCamera.lookAt( player.position );
+        playerCamera.lookAt(player.position);
 
         playerCamera.updateProjectionMatrix();
         requestAnimationFrame(UpdateLoop);
@@ -141,6 +151,12 @@ function playerMovement() {
             case 68: // d
                 moveRight = true;
                 break;
+            case 81: // q
+                lookLeft = true;
+                break;
+            case 69: // e
+                lookRight = true;
+                break;
         }
     };
 
@@ -157,6 +173,12 @@ function playerMovement() {
                 break;
             case 68: // d
                 moveRight = false;
+                break;
+            case 81: // q
+                lookLeft = false;
+                break;
+            case 69: // e
+                lookRight = false;
                 break;
         }
     };

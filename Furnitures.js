@@ -270,8 +270,8 @@ function furnitures() {
     scene.add(object);
     object.scale.set(.8, .8, .8);
     object.position.set(2, 1.2, -.7);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
+    //mesh.castShadow = true;
+    //mesh.receiveShadow = true;
   });
 
   //bedroom 1
@@ -606,7 +606,7 @@ function furnitures() {
     });
   });
 }
-var sofaMaterial = new THREE.MeshPhongMaterial;
-var bed1Material = new THREE.MeshPhongMaterial;
-var bed2Material = new THREE.MeshPhongMaterial;
-var masterBedMaterial = new THREE.MeshPhongMaterial;
+var sofaMaterial = new THREE.MeshBasicMaterial;
+var bed1Material = new THREE.MeshBasicMaterial;
+var bed2Material = new THREE.MeshBasicMaterial;
+var masterBedMaterial = new THREE.MeshBasicMaterial;

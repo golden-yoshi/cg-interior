@@ -1,3 +1,5 @@
+/** Unusued Class - Player movement controls in InitScene.js */
+
 // var moveForward, moveBackward, moveLeft, moveRight = false;
 
 // const clock = new THREE.Clock();
