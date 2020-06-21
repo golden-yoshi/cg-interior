@@ -1,5 +1,3 @@
-/**MakeLabelCanvas function src: https://threejsfundamentals.org/threejs/lessons/threejs-billboards.html */
-
 // Create custom canvas texture 
 function makeLabelCanvas(baseWidth, size, name) {
   const borderSize = 2;

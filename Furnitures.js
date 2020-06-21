@@ -270,8 +270,8 @@ function furnitures() {
     scene.add(object);
     object.scale.set(.8, .8, .8);
     object.position.set(2, 1.2, -.7);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
+    //mesh.castShadow = true;
+    //mesh.receiveShadow = true;
   });
 
   //bedroom 1

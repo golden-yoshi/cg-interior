@@ -4,7 +4,8 @@ var x = true;
 function buildGUI() {
     gui = new dat.GUI();
     var params = {
-        room_lighting: spotlight.intensity,
+        light_intensity: spotlight.intensity,
+        light_position: spotlight.position.x,
         show_room_labels: true,
         sofa: sofaMaterial.color.getHex(),
         master_bed: masterBedMaterial.color.getHex(),
@@ -14,10 +15,14 @@ function buildGUI() {
         change_floor_texture: false,
         player_perspective: false
     }
-    gui.add(params, 'room_lighting', 0, 1).onChange(function (val) {
+    var lighting = gui.addFolder('Room Lighting');
+    lighting.add(params, 'light_intensity', 0, 1).onChange(function (val) {
         spotlight.intensity = val;
     });
-
+    lighting.add(params, 'light_position', -10, 10).onChange(function (val) {
+        spotlight.position.x = val;
+        spotlight.position.z = val;
+    });
     var colours = gui.addFolder('Furniture Colours');
     colours.addColor(params, 'sofa').onChange(function (val) {
         sofaMaterial.color.setHex(val);
@@ -83,12 +88,15 @@ function buildGUI() {
         if (val == true) {
             controls.enabled = false;
             playerCameraActive = true;
+            playerEnabled = true;
             requestAnimationFrame(UpdateLoop);
-            // playerMovement();
+            document.getElementById("player-controls").style.visibility = "visible";
         } else {
             controls.enabled = true;
             playerCameraActive = false;
+            playerEnabled = false
             requestAnimationFrame(UpdateLoop);
+            document.getElementById("player-controls").style.visibility = "hidden";
         }
     });
     gui.open();
